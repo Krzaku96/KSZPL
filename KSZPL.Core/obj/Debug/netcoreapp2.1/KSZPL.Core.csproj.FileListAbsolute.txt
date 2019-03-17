@@ -1,0 +1,6 @@
+C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\bin\Debug\netcoreapp2.1\KSZPL.Core.deps.json
+C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\bin\Debug\netcoreapp2.1\KSZPL.Core.dll
+C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\obj\Debug\netcoreapp2.1\KSZPL.Core.csprojAssemblyReference.cache
+C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\obj\Debug\netcoreapp2.1\KSZPL.Core.csproj.CoreCompileInputs.cache
+C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\obj\Debug\netcoreapp2.1\KSZPL.Core.AssemblyInfoInputs.cache
+C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\obj\Debug\netcoreapp2.1\KSZPL.Core.AssemblyInfo.cs
