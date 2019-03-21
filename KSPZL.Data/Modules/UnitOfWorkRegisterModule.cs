@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-namespace KSZPL.Data.Models
+namespace KSZPL.Data.Modules
 {
     class UnitOfWorkRegisterModule : Module
     {
