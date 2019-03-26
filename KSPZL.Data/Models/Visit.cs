@@ -9,15 +9,15 @@ namespace KSZPL.Data.Models
     public class Visit
     {
         [Key]
-        public decimal Id { get; set; }
+        public int Id { get; set; }
 
         public string Status { get; set; }
 
-        [ForeignKey("Patient")]
-        public decimal IdPatient { get; set; }
+        [ForeignKey("PatientCard")]
+        public int PatientCardId { get; set; }
 
         [ForeignKey("User")]
-        public decimal IdUser { get; set; }
+        public int UserId { get; set; }
 
         public string Description { get; set; }
 

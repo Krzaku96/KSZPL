@@ -9,14 +9,16 @@ namespace KSZPL.Data.Models
     public class PatientCard
     {
         [Key]
-        public decimal Id { get; set; }
+        public int Id { get; set; }
 
         [ForeignKey("Patient")]
-        public decimal IdPatient{ get; set; }
-
-        public string HistoryTreatment { get; set; }
+        public int PatientId{ get; set; }
 
         [ForeignKey("User")]
-        public decimal IdUser { get; set; }
+        public int UserId { get; set; }
+
+        public List<Recipe> Recipes { get; set; }
+
+        public List<Visit> Visits { get; set; }
     }
 }

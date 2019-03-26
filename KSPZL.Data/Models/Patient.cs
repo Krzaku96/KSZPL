@@ -8,11 +8,11 @@ namespace KSZPL.Data.Models
     public class Patient
     {
         [Key]
-        public decimal Id { get; set; }
+        public int Id { get; set; }
 
-        public string Imie { get; set; }
+        public string Name { get; set; }
 
-        public string Nazwisko { get; set; }
+        public string Surname { get; set; }
 
         public DateTime DateRegister { get; set; }
 
@@ -20,10 +20,11 @@ namespace KSZPL.Data.Models
 
         public string Email { get; set; }
 
-        public decimal NIP { get; set; }
+        public int? NIP { get; set; }
 
-        public decimal PESEL { get; set; }
+        public int PESEL { get; set; }
 
         public DateTime DateBirth { get; set; }
+
     }
 }

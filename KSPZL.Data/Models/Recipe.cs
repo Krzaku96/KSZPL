@@ -9,13 +9,13 @@ namespace KSZPL.Data.Models
     public class Recipe
     {
         [Key]
-        public decimal Id { get; set; }
+        public int Id { get; set; }
 
         [ForeignKey("PatientCard")]
-        public decimal IdPatientCard { get; set; }
+        public int PatientCardId { get; set; }
 
         [ForeignKey("User")]
-        public decimal IdUser { get; set; }
+        public int UserId { get; set; }
 
         public DateTime DateRelease { get; set; }
 

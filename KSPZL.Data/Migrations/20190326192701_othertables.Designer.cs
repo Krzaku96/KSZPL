@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KSZPL.Data.Migrations
 {
     [DbContext(typeof(KSZPLDbContext))]
-    [Migration("20190321202435_othertables")]
+    [Migration("20190326192701_othertables")]
     partial class othertables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +23,9 @@ namespace KSZPL.Data.Migrations
 
             modelBuilder.Entity("KSZPL.Data.Models.Patient", b =>
                 {
-                    b.Property<decimal>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address");
 
@@ -33,13 +35,13 @@ namespace KSZPL.Data.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("Imie");
+                    b.Property<int?>("NIP");
 
-                    b.Property<decimal>("NIP");
+                    b.Property<string>("Name");
 
-                    b.Property<string>("Nazwisko");
+                    b.Property<int>("PESEL");
 
-                    b.Property<decimal>("PESEL");
+                    b.Property<string>("Surname");
 
                     b.HasKey("Id");
 
@@ -48,13 +50,13 @@ namespace KSZPL.Data.Migrations
 
             modelBuilder.Entity("KSZPL.Data.Models.PatientCard", b =>
                 {
-                    b.Property<decimal>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("HistoryTreatment");
+                    b.Property<int>("PatientId");
 
-                    b.Property<decimal>("IdPatient");
-
-                    b.Property<decimal>("IdUser");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
@@ -63,17 +65,21 @@ namespace KSZPL.Data.Migrations
 
             modelBuilder.Entity("KSZPL.Data.Models.Recipe", b =>
                 {
-                    b.Property<decimal>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateRelease");
 
-                    b.Property<decimal>("IdPatientCard");
-
-                    b.Property<decimal>("IdUser");
+                    b.Property<int>("PatientCardId");
 
                     b.Property<string>("PrescribedMedicines");
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PatientCardId");
 
                     b.ToTable("Recipes");
                 });
@@ -103,23 +109,43 @@ namespace KSZPL.Data.Migrations
 
             modelBuilder.Entity("KSZPL.Data.Models.Visit", b =>
                 {
-                    b.Property<decimal>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateVisit");
 
                     b.Property<string>("Description");
 
-                    b.Property<decimal>("IdPatient");
-
-                    b.Property<decimal>("IdUser");
+                    b.Property<int>("PatientCardId");
 
                     b.Property<string>("Place");
 
                     b.Property<string>("Status");
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("PatientCardId");
+
                     b.ToTable("Visits");
+                });
+
+            modelBuilder.Entity("KSZPL.Data.Models.Recipe", b =>
+                {
+                    b.HasOne("KSZPL.Data.Models.PatientCard")
+                        .WithMany("Recipes")
+                        .HasForeignKey("PatientCardId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("KSZPL.Data.Models.Visit", b =>
+                {
+                    b.HasOne("KSZPL.Data.Models.PatientCard")
+                        .WithMany("Visits")
+                        .HasForeignKey("PatientCardId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
