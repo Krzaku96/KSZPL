@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KSZPL.Data.Migrations
 {
     [DbContext(typeof(KSZPLDbContext))]
-    [Migration("20190321130703_init")]
+    [Migration("20190328151027_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,6 +36,8 @@ namespace KSZPL.Data.Migrations
                     b.Property<byte[]>("PasswordSalt");
 
                     b.Property<string>("Role");
+
+                    b.Property<string>("Token");
 
                     b.Property<string>("Username");
 

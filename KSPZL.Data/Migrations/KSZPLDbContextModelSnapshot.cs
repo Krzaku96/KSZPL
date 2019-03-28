@@ -35,6 +35,8 @@ namespace KSZPL.Data.Migrations
 
                     b.Property<string>("Role");
 
+                    b.Property<string>("Token");
+
                     b.Property<string>("Username");
 
                     b.HasKey("Id");

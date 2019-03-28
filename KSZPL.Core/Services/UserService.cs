@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using KSZPL.Core.Helpers;
 using KSZPL.Core.Interfaces;
 using KSZPL.Data.Context;
 using KSZPL.Data.Models;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace KSZPL.Core.Services
 {
     class UserService : IUserService
     {
         private readonly KSZPLDbContext _context;
+        private readonly AppSettings _appSettings;
 
-        public UserService(KSZPLDbContext context)
+        public UserService(KSZPLDbContext context, IOptions<AppSettings> appSettings)
         {
             _context = context;
+            _appSettings = appSettings.Value;
         }
 
         public User Authenticate(string username, string password)
@@ -31,7 +38,30 @@ namespace KSZPL.Core.Services
                 return null;
             }
 
-            return !VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt) ? null : user;
+            var passwordVerification = !VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt) ? null : user;
+
+            if (passwordVerification == null)
+            {
+                return null;
+            }
+            
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                    new Claim(ClaimTypes.Role, user.Role)
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+            user.Token = tokenString;
+
+            return user;
         }
 
         public IEnumerable<User> GetAll()
