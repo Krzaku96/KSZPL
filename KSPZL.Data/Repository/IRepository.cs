@@ -11,9 +11,9 @@ namespace KSZPL.Data.Repository
         IQueryable<T> GetAll();
         IQueryable<T> Get(Expression<Func<T, bool>> predicate);
         T GetById(object id);
-        void Add(T entity);
+        T Add(T entity);
         Task AddAsync(T entity, CancellationToken cancellationToken);
-        void Delete(T entity);
-        void Update(T entity);
+        T Delete(T entity);
+        T Update(T entity);
     }
 }
