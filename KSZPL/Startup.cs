@@ -95,14 +95,16 @@ namespace KSZPL.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseHttpsRedirection();
+            }
 
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
-            app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(
                 options => { options.SwaggerEndpoint("/swagger/KSZPL-Core/swagger.json", "KSZPL Server"); });
-
-            app.UseHttpsRedirection();
+            app.UseMvc();
         }
     }
 }
