@@ -7,6 +7,7 @@ using KSZPL.Api.Dtos.Patient;
 using KSZPL.Core.Interfaces;
 using KSZPL.Data.Context;
 using KSZPL.Data.Models;
+using KSZPL.Data.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,13 +18,13 @@ namespace KSZPL.Api.Controllers
     {
         private readonly KSZPLDbContext _dbContext;
         private readonly IMapper _mapper;
-        private readonly IPatientService _patientService;
+        private readonly IRepository<Patient> _repository;
 
-        public PatientController(KSZPLDbContext dbContext, IMapper mapper, IPatientService patientService)
+        public PatientController(KSZPLDbContext dbContext, IMapper mapper, IRepository<Patient> repository)
         {
             _dbContext = dbContext;
             _mapper = mapper;
-            _patientService = patientService;
+            _repository = repository;
         }
 
         [AllowAnonymous]
@@ -37,7 +38,8 @@ namespace KSZPL.Api.Controllers
 
             var patient = _mapper.Map<Patient>(patientDto);
 
-            return Ok(_patientService.RegisterPatient(patient));
+            return Ok(_repository.Add(patient));
+
         }
 
         [AllowAnonymous]
@@ -51,7 +53,7 @@ namespace KSZPL.Api.Controllers
 
             var patient = _mapper.Map<Patient>(patientDto);
 
-            return Ok(_patientService.EditPatient(patient));
+            return Ok(_repository.Update(patient));
         }
 
         [AllowAnonymous]
@@ -63,12 +65,9 @@ namespace KSZPL.Api.Controllers
                 return BadRequest();
             }
 
-            if (!_patientService.DeletePatient(id))
-            {
-                return BadRequest();
-            }
+            var patient = _dbContext.Patients.FirstOrDefault(x => x.Id == id);
 
-            return Ok();
+            return Ok(_repository.Delete(patient));
         }
 
         [AllowAnonymous]
@@ -80,7 +79,7 @@ namespace KSZPL.Api.Controllers
                 return BadRequest();
             }
 
-            var patients = _patientService.GetAllPatients();
+            var patients = _repository.GetAll();
             var patientDtos = _mapper.Map<IList<PatientDto>>(patients);
             return Ok(patientDtos);
         }
@@ -94,7 +93,7 @@ namespace KSZPL.Api.Controllers
                 return BadRequest();
             }
 
-            var patient = _patientService.GetPatient(id);
+            var patient = _repository.GetById(id);
             var patientDto = _mapper.Map<PatientDto>(patient);
             return Ok(patientDto);
         }
