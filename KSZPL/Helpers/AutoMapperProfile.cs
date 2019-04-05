@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using KSZPL.Api.Dtos.Patient;
 using KSZPL.Api.Dtos.User;
 using KSZPL.Api.Dtos.Visit;
 using KSZPL.Data.Models;
@@ -13,6 +14,8 @@ namespace KSZPL.Api.Helpers
             CreateMap<UserDto, User>();
             CreateMap<Visit, VisitDto>();
             CreateMap<VisitDto, Visit>();
+            CreateMap<Patient, PatientDto>();
+            CreateMap<PatientDto, Patient>();
         }
     }
 }

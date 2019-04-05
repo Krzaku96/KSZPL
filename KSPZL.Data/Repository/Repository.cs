@@ -20,6 +20,7 @@ namespace KSZPL.Data.Repository
         public T Add(T entity)
         {
             _context.Set<T>().Add(entity);
+            _context.SaveChanges();
 
             return entity;
         }
@@ -27,12 +28,14 @@ namespace KSZPL.Data.Repository
         public async Task AddAsync(T entity, CancellationToken cancellationToken)
         {
             await _context.Set<T>().AddAsync(entity, cancellationToken);
+            _context.SaveChanges();
         }
 
         public T Delete(T entity)
         {
             if (entity != null)
                 _context.Set<T>().Remove(entity);
+            _context.SaveChanges();
 
             return entity;
         }
@@ -50,12 +53,14 @@ namespace KSZPL.Data.Repository
         public T GetById(object id)
         {
             return _context.Set<T>().Find(id);
+
         }
 
         public T Update(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
-            _context.Set<T>().Attach(entity);
+            _context.Set<T>().Update(entity);
+            _context.SaveChanges();
 
             return entity;
         }
