@@ -7,6 +7,7 @@ using KSZPL.Api.Dtos.Visit;
 using KSZPL.Core.Interfaces;
 using KSZPL.Data.Context;
 using KSZPL.Data.Models;
+using KSZPL.Data.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,13 +18,14 @@ namespace KSZPL.Api.Controllers
     {
         private readonly KSZPLDbContext _dbContext;
         private readonly IMapper _mapper;
-        private readonly IVisitService _visitService;
+        private readonly IRepository<Visit> _repository;
 
-        public VisitController(IMapper mapper, KSZPLDbContext dbContext, IVisitService visitService)
+
+        public VisitController(IMapper mapper, KSZPLDbContext dbContext, IRepository<Visit> repository)
         {
             _mapper = mapper;
             _dbContext = dbContext;
-            _visitService = visitService;
+            _repository = repository;
         }
 
         [AllowAnonymous]
@@ -37,7 +39,7 @@ namespace KSZPL.Api.Controllers
 
             var visit = _mapper.Map<Visit>(visitDto);
 
-            return Ok(_visitService.CreateVisit(visit));
+            return Ok(_repository.Add(visit));
         }
 
         [AllowAnonymous]
@@ -50,7 +52,7 @@ namespace KSZPL.Api.Controllers
             }
             var visit = _mapper.Map<Visit>(visitDto);
 
-            return Ok(_visitService.EditVisit(visit));
+            return Ok(_repository.Update(visit));
         }
 
         [AllowAnonymous]
@@ -63,12 +65,9 @@ namespace KSZPL.Api.Controllers
                 return BadRequest();
             }
 
-            if (!_visitService.DeleteVisit(id))
-            {
-                return BadRequest();
-            }
+            var visit = _dbContext.Visits.FirstOrDefault(x => x.Id == id);
 
-            return Ok();
+            return Ok(_repository.Delete(visit));
         }
 
         [AllowAnonymous]
@@ -80,7 +79,7 @@ namespace KSZPL.Api.Controllers
                 return BadRequest();
             }
 
-            var visits = _visitService.GetAllVisits();
+            var visits = _repository.GetAll();
             var visitDtos = _mapper.Map<IList<VisitDto>>(visits);
             return Ok(visitDtos);
         }
@@ -94,7 +93,7 @@ namespace KSZPL.Api.Controllers
                 return BadRequest();
             }
 
-            var visit = _visitService.GetVisit(id);
+            var visit = _repository.GetById(id);
             var visitDto = _mapper.Map<VisitDto>(visit);
             return Ok(visitDto);
         }
