@@ -1,8 +1,11 @@
 C:\Users\Bartek\Documents\KSZPL\KSPZL.Data\bin\Debug\netcoreapp2.1\KSZPL.Data.deps.json
+C:\Users\Bartek\Documents\KSZPL\KSPZL.Data\bin\Debug\netcoreapp2.1\KSZPL.Data.runtimeconfig.json
+C:\Users\Bartek\Documents\KSZPL\KSPZL.Data\bin\Debug\netcoreapp2.1\KSZPL.Data.runtimeconfig.dev.json
 C:\Users\Bartek\Documents\KSZPL\KSPZL.Data\bin\Debug\netcoreapp2.1\KSZPL.Data.dll
+C:\Users\Bartek\Documents\KSZPL\KSPZL.Data\bin\Debug\netcoreapp2.1\KSZPL.Data.pdb
 C:\Users\Bartek\Documents\KSZPL\KSPZL.Data\obj\Debug\netcoreapp2.1\KSZPL.Data.csprojAssemblyReference.cache
 C:\Users\Bartek\Documents\KSZPL\KSPZL.Data\obj\Debug\netcoreapp2.1\KSZPL.Data.csproj.CoreCompileInputs.cache
 C:\Users\Bartek\Documents\KSZPL\KSPZL.Data\obj\Debug\netcoreapp2.1\KSZPL.Data.AssemblyInfoInputs.cache
 C:\Users\Bartek\Documents\KSZPL\KSPZL.Data\obj\Debug\netcoreapp2.1\KSZPL.Data.AssemblyInfo.cs
-C:\Users\Bartek\Documents\KSZPL\KSPZL.Data\bin\Debug\netcoreapp2.1\KSZPL.Data.runtimeconfig.json
-C:\Users\Bartek\Documents\KSZPL\KSPZL.Data\bin\Debug\netcoreapp2.1\KSZPL.Data.runtimeconfig.dev.json
+C:\Users\Bartek\Documents\KSZPL\KSPZL.Data\obj\Debug\netcoreapp2.1\KSZPL.Data.dll
+C:\Users\Bartek\Documents\KSZPL\KSPZL.Data\obj\Debug\netcoreapp2.1\KSZPL.Data.pdb

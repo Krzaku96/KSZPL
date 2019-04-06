@@ -1,6 +1,16 @@
 C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\bin\Debug\netcoreapp2.1\KSZPL.Core.deps.json
 C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\bin\Debug\netcoreapp2.1\KSZPL.Core.dll
+C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\bin\Debug\netcoreapp2.1\KSZPL.Core.pdb
+C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\bin\Debug\netcoreapp2.1\KSZPL.Data.dll
+C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\bin\Debug\netcoreapp2.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\bin\Debug\netcoreapp2.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\bin\Debug\netcoreapp2.1\KSZPL.Data.pdb
+C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\bin\Debug\netcoreapp2.1\Microsoft.IdentityModel.Tokens.xml
+C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\bin\Debug\netcoreapp2.1\System.IdentityModel.Tokens.Jwt.xml
 C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\obj\Debug\netcoreapp2.1\KSZPL.Core.csprojAssemblyReference.cache
 C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\obj\Debug\netcoreapp2.1\KSZPL.Core.csproj.CoreCompileInputs.cache
 C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\obj\Debug\netcoreapp2.1\KSZPL.Core.AssemblyInfoInputs.cache
 C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\obj\Debug\netcoreapp2.1\KSZPL.Core.AssemblyInfo.cs
+C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\obj\Debug\netcoreapp2.1\KSZPL.Core.csproj.CopyComplete
+C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\obj\Debug\netcoreapp2.1\KSZPL.Core.dll
+C:\Users\Bartek\Documents\KSZPL\KSZPL.Core\obj\Debug\netcoreapp2.1\KSZPL.Core.pdb

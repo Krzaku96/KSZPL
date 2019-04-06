@@ -17,20 +17,27 @@ namespace KSZPL.Data.Repository
             _context = context;
         }
 
-        public void Add(T entity)
+        public T Add(T entity)
         {
             _context.Set<T>().Add(entity);
+            _context.SaveChanges();
+
+            return entity;
         }
 
         public async Task AddAsync(T entity, CancellationToken cancellationToken)
         {
             await _context.Set<T>().AddAsync(entity, cancellationToken);
+            _context.SaveChanges();
         }
 
-        public void Delete(T entity)
+        public T Delete(T entity)
         {
             if (entity != null)
                 _context.Set<T>().Remove(entity);
+            _context.SaveChanges();
+
+            return entity;
         }
 
         public IQueryable<T> GetAll()
@@ -46,13 +53,16 @@ namespace KSZPL.Data.Repository
         public T GetById(object id)
         {
             return _context.Set<T>().Find(id);
+
         }
 
-        public void Update(T entity)
+        public T Update(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
-            _context.Set<T>().Attach(entity);
+            _context.Set<T>().Update(entity);
+            _context.SaveChanges();
 
+            return entity;
         }
     }
 }
