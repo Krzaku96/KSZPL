@@ -9,6 +9,7 @@ using KSZPL.Core.Helpers;
 using KSZPL.Core.Interfaces;
 using KSZPL.Data.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -37,9 +38,9 @@ namespace KSZPL.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]UserDto userDto)
+        public IActionResult Authenticate([FromBody]AuthenticationDto authenticationDto)
         {
-            var user = _userService.Authenticate(userDto.Username, userDto.Password);
+            var user = _userService.Authenticate(authenticationDto.Username, authenticationDto.Password);
 
             return Ok(user);
         }
