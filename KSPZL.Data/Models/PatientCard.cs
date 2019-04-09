@@ -16,9 +16,5 @@ namespace KSZPL.Data.Models
 
         [ForeignKey("User")]
         public int UserId { get; set; }
-
-        public List<Recipe> Recipes { get; set; }
-
-        public List<Visit> Visits { get; set; }
     }
 }
