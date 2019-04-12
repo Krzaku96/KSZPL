@@ -10,7 +10,7 @@ class LoginComponent extends Component {
           <Card.Title>Log in to your account</Card.Title>
         </Card.Header>
         <Card.Body>
-          <Form>
+          <Form onSubmit={this.props.handleLoginSubmit}>
             <Form.Group name="username">
               <Form.Label>Username</Form.Label>
               <Form.Control onChange={this.props.handleUsernameChange} type="text" placeholder="Enter username" />
@@ -19,7 +19,7 @@ class LoginComponent extends Component {
               <Form.Label>Password</Form.Label>
               <Form.Control onChange={this.props.handlePasswordChange} type="password" placeholder="Enter password" />
             </Form.Group>
-            <Button onSubmit={this.props.handleLoginSubmit}>Login</Button>
+            <Button type="submit">Login</Button>
           </Form>
         </Card.Body>
       </Card>

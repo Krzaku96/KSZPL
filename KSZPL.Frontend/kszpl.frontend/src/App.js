@@ -12,11 +12,10 @@ class App extends Component {
       <Router>
         <div className="App">
           <div className="Header">
-            <AppBarContainer />
+            <AppBarContainer user={this.props.user} />
           </div>
           <div className="Body">
-            <Routes isLogged={this.props.isLogged} />
-            {this.props.isLogged ? null : <LoginContainer />}
+            {localStorage.getItem("token") ? <Routes /> : <LoginContainer />}
           </div>
           <div className="Footer">©2019 KSZPL. All rights reserved.</div>
         </div>

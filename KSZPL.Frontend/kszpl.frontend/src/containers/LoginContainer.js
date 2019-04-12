@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import LoginComponent from "../components/LoginComponent";
 import axios from "axios";
 import { BASE_URL } from "../constants";
@@ -7,7 +8,25 @@ class LoginContainer extends Component {
   state = {
     username: "",
     password: "",
-    isLogged: false
+    isLogged: false,
+    user: []
+  };
+
+  saveDataToLocalStorage = () => {
+    console.log("lol");
+    localStorage.setItem("token", JSON.stringify(this.state.user.token));
+  };
+
+  redirectToHome = () => {
+    this.saveDataToLocalStorage();
+    window.location.reload();
+    return this.props.history.push({
+      pathname: "/",
+      state: {
+        user: this.state.user,
+        isLogged: this.state.isLogged
+      }
+    });
   };
 
   handleUsernameChange = e => {
@@ -18,20 +37,35 @@ class LoginContainer extends Component {
     this.setState({ password: e.target.value });
   };
 
-  handleLoginSubmit = () => {
+  handleLoginSubmit = event => {
+    event.preventDefault();
+    console.log("handle");
+
     const postData = {
       username: this.state.username,
       password: this.state.password
     };
 
-    axios.post(BASE_URL + "Users/authenticate", { postData }).then(res => {
-      this.setState({ isLogged: true });
-      //zapisanie tokena w appSettings
-      console.log(res);
-      console.log(res.data);
-      //przejscie do Home z przekazaniem mu info ze isLogged
-    });
+    let axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    };
+
+    axios
+      .post(BASE_URL + "Users/authenticate", postData, axiosConfig)
+      .then(response => {
+        if (response.data) {
+          this.setState({ user: response.data, isLogged: true });
+          this.redirectToHome();
+          console.log(response);
+        } else {
+          console.log("Can't find response");
+        }
+      });
   };
+
   render() {
     return (
       <LoginComponent
@@ -43,4 +77,4 @@ class LoginContainer extends Component {
   }
 }
 
-export default LoginContainer;
+export default withRouter(LoginContainer);

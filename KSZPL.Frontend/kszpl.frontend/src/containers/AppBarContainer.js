@@ -7,7 +7,7 @@ class AppBarContainer extends Component {
   };
 
   render() {
-    return <AppBarComponent redirectToHome={this.redirectToHome} />;
+    return <AppBarComponent redirectToHome={this.redirectToHome}/>;
   }
 }
 
