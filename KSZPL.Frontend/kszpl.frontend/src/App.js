@@ -12,7 +12,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <div className="Header">
-            <AppBarContainer user={this.props.user} />
+            <AppBarContainer  />
           </div>
           <div className="Body">
             {localStorage.getItem("token") ? <Routes /> : <LoginContainer />}

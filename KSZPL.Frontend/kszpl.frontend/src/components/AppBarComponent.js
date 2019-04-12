@@ -17,9 +17,11 @@ class AppBarComponent extends Component {
               Link
             </Nav.Link>
             <NavDropdown className="color-white" title="Your account">
-              <NavDropdown.Item href="#action/3.1">Details</NavDropdown.Item>
+              <NavDropdown.Item onClick={this.props.redirectToDetails}>
+                Details
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item>
+              <NavDropdown.Item>Logout</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

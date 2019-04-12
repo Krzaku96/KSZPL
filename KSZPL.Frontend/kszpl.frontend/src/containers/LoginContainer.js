@@ -13,8 +13,11 @@ class LoginContainer extends Component {
   };
 
   saveDataToLocalStorage = () => {
-    console.log("lol");
     localStorage.setItem("token", JSON.stringify(this.state.user.token));
+    localStorage.setItem("username", JSON.stringify(this.state.user.username));
+    localStorage.setItem("firstName", JSON.stringify(this.state.user.firstName));
+    localStorage.setItem("lastName", JSON.stringify(this.state.user.lastName));
+    localStorage.setItem("role", JSON.stringify(this.state.user.role));
   };
 
   redirectToHome = () => {
@@ -39,7 +42,6 @@ class LoginContainer extends Component {
 
   handleLoginSubmit = event => {
     event.preventDefault();
-    console.log("handle");
 
     const postData = {
       username: this.state.username,
