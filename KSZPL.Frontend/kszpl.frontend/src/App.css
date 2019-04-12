@@ -1,0 +1,25 @@
+.App {
+  text-align: center;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding-bottom: 50px;
+}
+
+.Footer {
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: #fff;
+  background-color: #3f51b5;
+}
+
+.Body {
+  padding: 10px;
+}
+
+.Header {
+  background-color: #3f51b5;
+  color: #fff;
+}
