@@ -20,7 +20,7 @@ class AppBarComponent extends Component {
               <NavDropdown.Item onClick={this.props.redirectToDetails}>
                 Details
               </NavDropdown.Item>
-              {this.props.role==="Admin" ? (
+              {this.props.role === "Admin" ? (
                 <div>
                   <NavDropdown.Item onClick={this.props.addUserOnClick}>
                     Add user
@@ -31,7 +31,9 @@ class AppBarComponent extends Component {
                 </div>
               ) : null}
               <NavDropdown.Divider />
-              <NavDropdown.Item>Logout</NavDropdown.Item>
+              <NavDropdown.Item onClick={this.props.logout}>
+                Logout
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

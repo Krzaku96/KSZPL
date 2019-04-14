@@ -65,7 +65,9 @@ class AppBarContainer extends Component {
   addUserOnClick = () => {
     //to do
   }
-
+  logout = () => {
+    localStorage.clear();
+  }
   render() {
     return (
       <AppBarComponent
@@ -74,6 +76,7 @@ class AppBarContainer extends Component {
         user={this.props.user}
         role={this.state.role}
         showUsersOnClick={this.showUsersOnClick}
+        logout={this.logout}
       />
     );
   }
