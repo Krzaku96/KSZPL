@@ -16,7 +16,9 @@ class AppBarContainer extends Component {
   };
 
   redirectToHome = () => {
-    this.context.router.history.push("/");
+    return this.props.history.push({
+      pathname: "/"
+    });
   };
 
   redirectToDetails = () => {
@@ -49,25 +51,23 @@ class AppBarContainer extends Component {
       }
     };
 
-    axios
-      .get(BASE_URL + "Users", axiosConfig)
-      .then(response => {
-        if (response.data) {
-          this.setState({ users: response.data});
-          this.redirectToShowUsers();
-          console.log(response);
-        } else {
-          console.log("Can't find response");
-        }
-      });
+    axios.get(BASE_URL + "Users", axiosConfig).then(response => {
+      if (response.data) {
+        this.setState({ users: response.data });
+        this.redirectToShowUsers();
+        console.log(response);
+      } else {
+        console.log("Can't find response");
+      }
+    });
   };
 
   addUserOnClick = () => {
     //to do
-  }
+  };
   logout = () => {
     localStorage.clear();
-  }
+  };
   render() {
     return (
       <AppBarComponent

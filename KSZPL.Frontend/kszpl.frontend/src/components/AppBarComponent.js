@@ -10,11 +10,8 @@ class AppBarComponent extends Component {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Nav className="mr-auto">
-            <Nav.Link className="color-white" href="#home">
+            <Nav.Link className="color-white" onClick={this.props.redirectToHome}>
               Home
-            </Nav.Link>
-            <Nav.Link className="color-white" href="#link">
-              Link
             </Nav.Link>
             <NavDropdown className="color-white" title="Your account">
               <NavDropdown.Item onClick={this.props.redirectToDetails}>
