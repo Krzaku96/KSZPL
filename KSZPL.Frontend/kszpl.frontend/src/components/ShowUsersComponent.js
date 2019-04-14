@@ -1,12 +1,23 @@
 import React, { Component } from "react";
-import { Row, Col } from "react-bootstrap";
+import UserComponent from "./UserComponent";
 
 class ShowUsersComponent extends Component {
+  mapUsersToShow = () => {
+    return this.props.location.state.users.map(user => (
+      <UserComponent
+        username={user.username}
+        firstName={user.firstName}
+        lastName={user.lastName}
+        role={user.role}
+      />
+    ));
+  };
+  
   render() {
     return (
-      <Col>
-        <Row>Users</Row>
-      </Col>
+      <div>
+        {this.mapUsersToShow()}
+      </div>
     );
   }
 }

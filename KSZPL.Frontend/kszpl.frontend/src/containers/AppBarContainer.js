@@ -65,9 +65,11 @@ class AppBarContainer extends Component {
   addUserOnClick = () => {
     //to do
   };
+
   logout = () => {
     localStorage.clear();
   };
+  
   render() {
     return (
       <AppBarComponent
