@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {Switch, Route} from "react-router-dom";
 import HomeContainer from "../containers/HomeContainer";
 import DetailsComponent from "./DetailsComponent";
-import ListVisitsComponent from "./Visit/ListVisitsComponent";
 import CreateVisitComponent from "./Visit/CreateVisitComponent";
 
 class Routes extends Component {
