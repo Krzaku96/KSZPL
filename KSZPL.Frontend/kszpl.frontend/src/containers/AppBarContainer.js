@@ -62,19 +62,23 @@ class AppBarContainer extends Component {
     });
   };
 
-  addUserOnClick = () => {
-    //to do
+  redirectToAddUser = () => {
+    return this.props.history.push({
+      pathname: "/createUser"
+    });
   };
 
   logout = () => {
     localStorage.clear();
+    window.location.reload();
   };
-  
+
   render() {
     return (
       <AppBarComponent
         redirectToHome={this.redirectToHome}
         redirectToDetails={this.redirectToDetails}
+        redirectToAddUser={this.redirectToAddUser}
         user={this.props.user}
         role={this.state.role}
         showUsersOnClick={this.showUsersOnClick}
