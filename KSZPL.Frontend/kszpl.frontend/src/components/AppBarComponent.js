@@ -19,7 +19,7 @@ class AppBarComponent extends Component {
               </NavDropdown.Item>
               {this.props.role === "Admin" ? (
                 <div>
-                  <NavDropdown.Item onClick={this.props.addUserOnClick}>
+                  <NavDropdown.Item onClick={this.props.redirectToAddUser}>
                     Add user
                   </NavDropdown.Item>
                   <NavDropdown.Item onClick={this.props.showUsersOnClick}>
