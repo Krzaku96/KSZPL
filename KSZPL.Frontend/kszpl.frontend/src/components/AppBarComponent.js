@@ -16,6 +16,16 @@ class AppBarComponent extends Component {
             >
               Home
             </Nav.Link>
+            {this.props.role === "Receptionist" ? (
+              <NavDropdown className="color-white" title="Pacients">
+                <NavDropdown.Item onClick={this.props.addPacient}>
+                  Dodaj pacjenta
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={this.props.showPacients}>
+                  Lista pacjentów
+                </NavDropdown.Item>
+              </NavDropdown>
+            ) : null}
             <NavDropdown className="color-white" title="Your account">
               <NavDropdown.Item onClick={this.props.redirectToDetails}>
                 Details
