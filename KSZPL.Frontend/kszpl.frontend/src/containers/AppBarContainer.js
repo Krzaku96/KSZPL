@@ -36,6 +36,18 @@ class AppBarContainer extends Component {
     });
   };
 
+  redirectToAddUser = () => {
+    return this.props.history.push({
+      pathname: "/createUser"
+    });
+  };
+  
+  redirectToUpdateUser = () => {
+    return this.props.history.push({
+      pathname: "/changePassword"
+    });
+  };
+  
   checkRole = () => {
     var role = JSON.parse(localStorage.getItem("role"));
     this.setState({ role: role });
@@ -62,12 +74,6 @@ class AppBarContainer extends Component {
     });
   };
 
-  redirectToAddUser = () => {
-    return this.props.history.push({
-      pathname: "/createUser"
-    });
-  };
-
   logout = () => {
     localStorage.clear();
     window.location.reload();
@@ -79,6 +85,7 @@ class AppBarContainer extends Component {
         redirectToHome={this.redirectToHome}
         redirectToDetails={this.redirectToDetails}
         redirectToAddUser={this.redirectToAddUser}
+        redirectToUpdateUser={this.redirectToUpdateUser}
         user={this.props.user}
         role={this.state.role}
         showUsersOnClick={this.showUsersOnClick}
