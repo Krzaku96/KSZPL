@@ -17,7 +17,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace KSZPL.Api.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class UsersController : ControllerBase
@@ -55,8 +54,8 @@ namespace KSZPL.Api.Controllers
 
             return Ok();        
         }
-
-        [Authorize]
+        
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -64,8 +63,8 @@ namespace KSZPL.Api.Controllers
             var userDtos = _mapper.Map<IList<UserDto>>(users);
             return Ok(userDtos);
         }
-
-        [Authorize]
+        
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -79,14 +78,13 @@ namespace KSZPL.Api.Controllers
             var userDto = _mapper.Map<UserDto>(user);
             return Ok(userDto);
         }
-
-        [Authorize]
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]UserDto userDto)
+        
+        [AllowAnonymous]
+        [HttpPut]
+        public IActionResult Update([FromBody]UserDto userDto)
         {
             var user = _mapper.Map<User>(userDto);
-            user.Id = id;
-
+            
             _userService.Update(user, userDto.Password);
 
             return Ok();
