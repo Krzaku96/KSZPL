@@ -10,18 +10,33 @@ class AppBarComponent extends Component {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Nav className="mr-auto">
-            <Nav.Link className="color-white" href="#home">
+            <Nav.Link
+              className="color-white"
+              onClick={this.props.redirectToHome}
+            >
               Home
-            </Nav.Link>
-            <Nav.Link className="color-white" href="#link">
-              Link
             </Nav.Link>
             <NavDropdown className="color-white" title="Your account">
               <NavDropdown.Item onClick={this.props.redirectToDetails}>
                 Details
               </NavDropdown.Item>
+              {this.props.role === "Admin" ? (
+                <div>
+                  <NavDropdown.Item onClick={this.props.redirectToAddUser}>
+                    Add user
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={this.props.showUsersOnClick}>
+                    Show users
+                  </NavDropdown.Item>
+                </div>
+              ) : null}
+              <NavDropdown.Item onClick={this.props.redirectToUpdateUser}>
+                Change password
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item>Logout</NavDropdown.Item>
+              <NavDropdown.Item onClick={this.props.logout}>
+                Logout
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

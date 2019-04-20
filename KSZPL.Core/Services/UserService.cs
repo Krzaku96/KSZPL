@@ -99,7 +99,7 @@ namespace KSZPL.Core.Services
 
         public void Update(User userParam, string password = null)
         {
-            var user = _context.Users.Find(userParam.Id);
+            var user = _context.Users.Where(u => u.Username.Equals(userParam.Username)).Select(x => x).SingleOrDefault();
 
             if (user == null)
                 throw new AppException("User not found");
