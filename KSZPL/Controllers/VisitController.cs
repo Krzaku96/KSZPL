@@ -108,9 +108,7 @@ namespace KSZPL.Api.Controllers
                 return BadRequest();
             }
 
-            var visit = _repository.GetById(id);
-            var visitDto = _mapper.Map<VisitDto>(visit);
-            return Ok(visitDto);
+            return Ok(_visitService.CreateModelToShowVisit(id));
         }
 
 
