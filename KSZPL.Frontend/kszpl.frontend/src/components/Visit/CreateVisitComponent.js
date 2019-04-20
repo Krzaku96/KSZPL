@@ -9,20 +9,48 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 class CreateVisitComponent extends Component {
+
     constructor()
     {
         super();
         this.state = {
-            dateVisit: undefined,
+            dateVisit: new Date(),
             description: '', 
             place: '',
             id: null,
-            patientCardId: 0,
+            patientCardId: 1,
             status: '',
-            userId: 0,
+            userId: 1,
+            patients: [],
+            doctors: []
         }
     }
 
+
+    componentDidMount(){
+        axios.get(BASE_URL + 'visit/createvisit')
+       .then((response) => {
+       this.setState({
+           patients: response.data.patients,
+           doctors: response.data.doctors
+       });
+       })
+    }
+
+
+    createOptionsPatients = () =>{  return this.state.patients.map(patients => (
+          <option value={patients.value} key={patients.value}>
+            {patients.label}
+          </option>
+        ))
+    }
+
+    createOptionsDoctors = () =>{  return this.state.doctors.map(doctors => (
+        <option value={doctors.value} key={doctors.value}>
+          {doctors.label}
+        </option>
+      ))
+    }
 
     onChangeDescription = (event) => {
         this.setState({description: event.target.value});
@@ -45,6 +73,7 @@ class CreateVisitComponent extends Component {
     }
 
     onChangeDateVisit = dateVisit => this.setState({ dateVisit })
+
 
 
     addVisit = event => {
@@ -72,14 +101,7 @@ class CreateVisitComponent extends Component {
             <Row>
                 <Form horizontal>
                     <Row>
-                        <Col sm={4}> </Col>
-                            <Col sm={8}>
-                                
-                            </Col>
-                    </Row>
-                    <Row> {""} </Row>
-                    <Row>
-                        <Col componentClass={Form.Label} sm={12}> Termin wizyty: </Col>
+                        <Col sm={12}> <Form.Label> Termin wizyty: </Form.Label> </Col>
                         <Col sm={12}> 
                             
                             <DatePicker selected={this.state.dateVisit}  
@@ -87,44 +109,49 @@ class CreateVisitComponent extends Component {
                                         showTimeSelect
                                         timeFormat="HH:mm"
                                         timeIntervals={15}
-                                        dateFormat="MMMM d, yyyy hh:mm"
+                                        dateFormat="dd-MM-yyyy HH:mm"
                                         timeCaption="time" />
                         </Col>
                     </Row>
                     <Row>
-                        <Col componentClass={Form.Label} sm={12}> Opis: </Col>
-                        <Col sm={12}>
-                            <FormControl onBlur={this.onChangeDescription}  placeholder="Opis wizyty"/>
+                        <Col sm={12}> <Form.Label> Opis: </Form.Label> </Col>
+                        <Col sm={11}>
+                            <FormControl onChange={this.onChangeDescription}  placeholder="Opis wizyty"/>
                         </Col>
                     </Row>
                     <Row>
-                        <Col componentClass={Form.Label} sm={12}> Id karty pacjenta: </Col>
+                        <Col sm={12}> <Form.Label> Imię i nazwisko pacjenta: </Form.Label> </Col>
                         <Col sm={12}>
-                            <FormControl onBlur={this.onChangePatientCardId}  placeholder="Id karty pacjenta"/>
+                            <FormControl as="select" onChange={this.onChangePatientCardId} value={this.value}>
+                            {this.createOptionsPatients()}
+                            </FormControl>
                         </Col>
                     </Row>
                     <Row>
-                        <Col componentClass={Form.Label} sm={12}> Miejsce wizyty: </Col>
+                        <Col sm={12}> <Form.Label>Miejsce wizyty: </Form.Label> </Col>
                         <Col sm={12}>
-                            <FormControl onBlur={this.onChangePlace}  placeholder="Miejsce wizyty"/>
+                            <FormControl onChange={this.onChangePlace}  placeholder="Miejsce wizyty"/>
                         </Col>
                     </Row>
                     <Row>
-                        <Col componentClass={Form.Label} sm={12}> Status: </Col>
+                        <Col sm={12}> <Form.Label> Status: </Form.Label> </Col>
                         <Col sm={12}>
-                            <FormControl onBlur={this.onChangeStatus}  placeholder="Status wizyty"/>
+                            <FormControl onChange={this.onChangeStatus}  placeholder="Status wizyty"/>
                         </Col>
                     </Row>
                     <Row>
-                        <Col componentClass={Form.Label} sm={12}> Id lekarza: </Col>
+                        <Col sm={12}> <Form.Label> Imię i nazwisko lekarza: </Form.Label> </Col>
                         <Col sm={12}>
-                            <FormControl onBlur={this.onChangeUserId}  placeholder="Identyfikator lekarza"/>
+                            <FormControl as="select" onChange={this.onChangeUserId} value={this.value}>
+                            {this.createOptionsDoctors()}
+                            </FormControl>
                         </Col>
+                    </Row>
+                    <Row>
+                    <Col> <Form.Label>  </Form.Label> </Col>
                     </Row>
 
-
                     <Row>
-                        <br></br>
                         <Col sm={2}></Col>
                         <Col sm={12}>
                             <Button onClick={this.addVisit} className="btn btn-primary" type="submit">Dodaj wizytę</Button>
