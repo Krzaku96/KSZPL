@@ -104,30 +104,21 @@ namespace KSZPL.Core.Services
                             Place = v.Place,
                             UserId = v.UserId }).First();
 
-            var patientCardId = (from p in visitsDto
-                                 where p.Id == id
-                                 select p.PatientCardId).FirstOrDefault();
-
-            var doctorId = (from p in visitsDto
-                            where p.Id == id
-                            select p.UserId).FirstOrDefault();
-
-
             var patientName = (from p in patientsDto
-                               where p.Id == patientCardId
+                               where p.Id == visit.PatientCardId
                                select p.Name).FirstOrDefault();
             var patientSurname = (from p in patientsDto
-                                  where p.Id == patientCardId
+                                  where p.Id == visit.PatientCardId
                                   select p.Surname).FirstOrDefault();
 
             var patient = patientName + " " + patientSurname;
 
 
             var doctorFirstName = (from p in usersDto
-                                   where p.Id == doctorId
+                                   where p.Id == visit.UserId
                                    select p.FirstName).FirstOrDefault();
             var doctorLastName = (from p in usersDto
-                                  where p.Id == doctorId
+                                  where p.Id == visit.UserId
                                   select p.LastName).FirstOrDefault();
             var doctor = doctorFirstName + " " + doctorLastName;
 
@@ -144,6 +135,109 @@ namespace KSZPL.Core.Services
                 DoctorName = doctor
             };
 
+        }
+
+        public GetEditVisitDto CreateModelToEditVisit(int id)
+        {
+            var allVisit = _repositoryVisit.GetAll();
+            var visitsDto = _mapper.Map<IList<VisitDto>>(allVisit);
+            var allPatient = _repositoryPatient.GetAll();
+            var patientsDto = _mapper.Map<IList<PatientDto>>(allPatient);
+            var allUsers = _repositoryUser.GetAll();
+            var usersDto = _mapper.Map<IList<UserDto>>(allUsers);
+            var allPatientCard = _repositoryPatientCard.GetAll();
+            var patientCardsDto = _mapper.Map<IList<PatientCardDto>>(allPatientCard);
+
+            var visit = (from v in visitsDto
+                         where v.Id == id
+                         select new Visit
+                         {
+                             Id = v.Id,
+                             Status = v.Status,
+                             PatientCardId = v.PatientCardId,
+                             Description = v.Description,
+                             DateVisit = v.DateVisit,
+                             Place = v.Place,
+                             UserId = v.UserId
+                         }).First();
+
+            var patientCardId = (from p in visitsDto
+                                 where p.Id == id
+                                 select p.PatientCardId).FirstOrDefault();
+
+            var doctorId = (from p in visitsDto
+                            where p.Id == id
+                            select p.UserId).FirstOrDefault();
+
+
+            var patientId = (from p in patientsDto
+                               where p.Id == patientCardId
+                               select p.Id).FirstOrDefault();
+
+            var patientsNames = (from p in patientsDto
+                                 select p.Name).ToList();
+            var patientsSurnames = (from p in patientsDto
+                                    select p.Surname).ToList();
+            var patients = patientsNames.Zip(patientsSurnames, (x, y) => x + " " + y).ToList();
+
+
+            var doctorsFirstNames = (from p in usersDto
+                                     where p.Role == Role.Doctor
+                                     select p.FirstName).ToList();
+            var doctorsLastNames = (from p in usersDto
+                                    where p.Role == Role.Doctor
+                                    select p.LastName).ToList();
+            var doctors = doctorsFirstNames.Zip(doctorsLastNames, (x, y) => x + " " + y).ToList();
+
+            var doctorsSelectForm = new List<SelectFormDto>();
+            var patientsSelectForm = new List<SelectFormDto>();
+
+            foreach (var item in doctors)
+            {
+                var idDoctor = (from x in usersDto
+                          where x.FirstName == item.Split(' ')[0]
+                          select x.Id).First();
+                doctorsSelectForm.Add(new SelectFormDto() { label = item, value = idDoctor.ToString() });
+            }
+            foreach (var item in patients)
+            {
+                var idPatient = (from x in patientsDto
+                                 where x.Name == item.Split(' ')[0]
+                                 select x.Id).First();
+
+                var idPatientCard = (from x in patientCardsDto
+                                     where x.PatientId == idPatient
+                                     select x.Id).First();
+
+                patientsSelectForm.Add(new SelectFormDto() { label = item, value = idPatientCard.ToString() });
+            }
+
+            return new GetEditVisitDto()
+            {
+                Id = id,
+                Status = visit.Status,
+                PatientCardId = visit.PatientCardId,
+                UserId = visit.UserId,
+                Description = visit.Description,
+                Place = visit.Place,
+                DateVisit = visit.DateVisit,
+                PatientId = patientId,
+                DoctorId = doctorId,
+                Patients = patientsSelectForm,
+                Doctors = doctorsSelectForm
+            };
+        }
+
+        public int GetPatientCardId(int patientId)
+        {
+            var allPatientCard = _repositoryPatientCard.GetAll();
+            var patientCardsDto = _mapper.Map<IList<PatientCardDto>>(allPatientCard);
+
+            var patientCardId = (from p in patientCardsDto
+                                 where p.Id == patientId
+                                 select p.Id).FirstOrDefault();
+
+            return patientCardId;
         }
     }
 }
