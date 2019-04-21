@@ -26,9 +26,9 @@ class ShowVisitComponent extends Component {
     }
 
     componentDidMount(){
-        debugger;
         axios.get( BASE_URL + `/visit/getvisit/${this.props.match.params.id}`)
             .then((response) => {
+                debugger;
                 this.setState({
                     dateVisit: response.data.dateVisit,
                     description: response.data.description,
