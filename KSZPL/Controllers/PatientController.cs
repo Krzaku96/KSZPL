@@ -43,7 +43,7 @@ namespace KSZPL.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPut("editpatient")]
+        [HttpPut]
         public IActionResult EditPatient([FromBody]PatientDto patientDto)
         {
             if (!ModelState.IsValid)
@@ -57,7 +57,7 @@ namespace KSZPL.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpDelete("deletepatient/{id}")]
+        [HttpDelete("{id}")]
         public IActionResult DeletePatient(int id)
         {
             if (!ModelState.IsValid)
@@ -71,7 +71,7 @@ namespace KSZPL.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("getallpatients")]
+        [HttpGet]
         public IActionResult GetAllPatients()
         {
             if (!ModelState.IsValid)
@@ -85,7 +85,7 @@ namespace KSZPL.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("getpatient/{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetPatient(int id)
         {
             if (!ModelState.IsValid)
@@ -97,7 +97,5 @@ namespace KSZPL.Api.Controllers
             var patientDto = _mapper.Map<PatientDto>(patient);
             return Ok(patientDto);
         }
-
-
     }
 }

@@ -8,7 +8,8 @@ class AppBarContainer extends Component {
   state = {
     username: "",
     role: "",
-    users: []
+    users: [],
+    patients: []
   };
 
   componentWillMount = () => {
@@ -35,6 +36,15 @@ class AppBarContainer extends Component {
       }
     });
   };
+
+  redirectToShowPatients = () => {
+    return this.props.history.push({
+      pathname: "/showPatients",
+      state: {
+        patients: this.state.patients
+      }
+    });
+  }
 
   redirectToAddUser = () => {
     return this.props.history.push({
@@ -80,6 +90,27 @@ class AppBarContainer extends Component {
     });
   };
 
+  showPatients = event => {
+    event.preventDefault();
+
+    let axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    };
+
+    axios.get(BASE_URL + "Patient", axiosConfig).then(response => {
+      if (response.data) {
+        this.setState({ patients: response.data });
+        console.log(response);
+        this.redirectToShowPatients();
+      } else {
+        console.log("Can't find response");
+      }
+    });
+  }
+
   logout = () => {
     localStorage.clear();
     window.location.reload();
@@ -96,6 +127,7 @@ class AppBarContainer extends Component {
         user={this.props.user}
         role={this.state.role}
         showUsersOnClick={this.showUsersOnClick}
+        showPatients={this.showPatients}
         logout={this.logout}
       />
     );

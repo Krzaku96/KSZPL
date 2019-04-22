@@ -21,7 +21,7 @@ class AppBarComponent extends Component {
                 <NavDropdown.Item onClick={this.props.redirectToAddPatient}>
                   Dodaj pacjenta
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={this.props.showPacients}>
+                <NavDropdown.Item onClick={this.props.showPatients}>
                   Lista pacjentów
                 </NavDropdown.Item>
               </NavDropdown>
