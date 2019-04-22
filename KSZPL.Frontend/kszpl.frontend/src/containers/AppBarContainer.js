@@ -48,6 +48,12 @@ class AppBarContainer extends Component {
     });
   };
   
+  redirectToAddPatient = () => {
+    return this.props.history.push({
+      pathname: "/createPatient"
+    });
+  };
+  
   checkRole = () => {
     var role = JSON.parse(localStorage.getItem("role"));
     this.setState({ role: role });
@@ -86,6 +92,7 @@ class AppBarContainer extends Component {
         redirectToDetails={this.redirectToDetails}
         redirectToAddUser={this.redirectToAddUser}
         redirectToUpdateUser={this.redirectToUpdateUser}
+        redirectToAddPatient={this.redirectToAddPatient}
         user={this.props.user}
         role={this.state.role}
         showUsersOnClick={this.showUsersOnClick}

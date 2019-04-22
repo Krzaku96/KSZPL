@@ -15,7 +15,7 @@ namespace KSZPL.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -77,8 +77,6 @@ namespace KSZPL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PatientCardId");
-
                     b.ToTable("Recipes");
                 });
 
@@ -127,25 +125,7 @@ namespace KSZPL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PatientCardId");
-
                     b.ToTable("Visits");
-                });
-
-            modelBuilder.Entity("KSZPL.Data.Models.Recipe", b =>
-                {
-                    b.HasOne("KSZPL.Data.Models.PatientCard")
-                        .WithMany("Recipes")
-                        .HasForeignKey("PatientCardId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("KSZPL.Data.Models.Visit", b =>
-                {
-                    b.HasOne("KSZPL.Data.Models.PatientCard")
-                        .WithMany("Visits")
-                        .HasForeignKey("PatientCardId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

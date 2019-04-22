@@ -7,7 +7,6 @@ namespace KSZPL.Api.Dtos.Patient
 {
     public class PatientDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime DateRegister { get; set; }
