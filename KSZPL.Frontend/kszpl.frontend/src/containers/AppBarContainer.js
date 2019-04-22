@@ -113,6 +113,7 @@ class AppBarContainer extends Component {
 
   logout = () => {
     localStorage.clear();
+    this.redirectToHome();
     window.location.reload();
   };
 
