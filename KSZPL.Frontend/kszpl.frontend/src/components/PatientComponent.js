@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
+import axios from "axios";
+import { BASE_URL } from "../constants";
 
 class PatientComponent extends Component {
   redirectToUpdatePatient = () => {
@@ -19,6 +21,28 @@ class PatientComponent extends Component {
       }
     });
   };
+
+  deletePatient = event => {
+    event.preventDefault();
+
+    let axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    };
+
+    axios
+      .delete(BASE_URL + "Patient/" + this.props.id, axiosConfig)
+      .then(response => {
+        if (response) {
+          console.log("deleted")
+        } else {
+          console.log("Can't find response");
+        }
+      });
+  };
+
   render() {
     return (
       <tr>
@@ -31,7 +55,9 @@ class PatientComponent extends Component {
           <Button variant="primary" onClick={this.redirectToUpdatePatient}>
             Update
           </Button>
-          <Button variant="danger">Delete</Button>
+          <Button variant="danger" onClick={this.deletePatient}>
+            Delete
+          </Button>
         </td>
       </tr>
     );
