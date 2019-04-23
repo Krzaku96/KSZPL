@@ -2,19 +2,19 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../constants";
-import CreatePacientComponent from "../components/CreatePacientComponent";
-import moment from "moment";
+import EditPacientComponent from "../components/EditPacientComponent";
 
-class CreatePacientContainer extends Component {
+class EditPatientContainer extends Component {
   state = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    address: "",
-    nip: null,
-    pesel: "",
-    dateOfBirth: "",
-    dateOfRegister: ""
+    id: this.props.location.state.id,
+    firstName: this.props.location.state.firstName,
+    lastName: this.props.location.state.lastName,
+    email: this.props.location.state.email,
+    address: this.props.location.state.address,
+    nip: this.props.location.state.nip,
+    pesel: this.props.location.state.pesel,
+    dateBirth: this.props.location.state.dateBirth,
+    dateRegister: this.props.location.state.dateOfRegister
   };
 
   redirectToSuccessAdd = () => {
@@ -48,10 +48,10 @@ class CreatePacientContainer extends Component {
   };
 
   handleDateOfBirthChange = e => {
-    this.setState({ dateOfBirth: e.target.value });
+    this.setState({ dateBirth: e.target.value });
   };
 
-  addPatientOnClick = event => {
+  editPatientOnClick = event => {
     event.preventDefault();
 
     let axiosConfig = {
@@ -61,34 +61,30 @@ class CreatePacientContainer extends Component {
       }
     };
 
-    this.setState({ dateOfRegister: moment().format("YYYY-MM-DD") });
-
     const postData = {
+      id: this.state.id,
       name: this.state.firstName,
       surname: this.state.lastName,
       email: this.state.email,
       address: this.state.address,
       nip: this.state.nip,
-      dateBirth: this.state.dateOfBirth,
-      dateRegister: this.state.dateOfRegister,
-      pesel: this.state.pesel
+      dateBirth: this.state.dateBirth,
+      dateRegister: this.state.dateRegister
     };
 
-    axios
-      .post(BASE_URL + "Patient/registerpatient", postData, axiosConfig)
-      .then(response => {
-        if (response) {
-          this.redirectToSuccessAdd();
-        } else {
-          console.log("Can't find response");
-        }
-      });
+    axios.put(BASE_URL + "Patient", postData, axiosConfig).then(response => {
+      if (response) {
+        this.redirectToSuccessAdd();
+      } else {
+        console.log("Can't find response");
+      }
+    });
   };
 
   render() {
     return (
-      <CreatePacientComponent
-        addPatientOnClick={this.addPatientOnClick}
+      <EditPacientComponent
+        editPatientOnClick={this.editPatientOnClick}
         handleFirstNameChange={this.handleFirstNameChange}
         handleLastNameChange={this.handleLastNameChange}
         handleAddressChange={this.handleAddressChange}
@@ -96,9 +92,17 @@ class CreatePacientContainer extends Component {
         handleEmailChange={this.handleEmailChange}
         handleNIPChange={this.handleNIPChange}
         handlePeselChange={this.handlePeselChange}
+        firstName={this.state.firstName}
+        lastName={this.state.lastName}
+        dateBirth={this.state.dateBirth}
+        pesel={this.state.pesel}
+        address={this.state.address}
+        nip={this.state.nip}
+        dateRegister={this.state.dateRegister}
+        email={this.state.email}
       />
     );
   }
 }
 
-export default withRouter(CreatePacientContainer);
+export default withRouter(EditPatientContainer);

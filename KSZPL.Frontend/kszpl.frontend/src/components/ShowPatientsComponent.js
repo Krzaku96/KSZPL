@@ -7,11 +7,16 @@ class ShowPatientsComponent extends Component {
     return this.props.location.state.patients.map((patient,id) => (
       <PatientComponent
         key={id}
-        id={id+1}
-        firstName={patient.firstName}
-        lastName={patient.lastName}
+        nr={id+1}
+        id={patient.id}
+        firstName={patient.name}
+        lastName={patient.surname}
         dateBirth={patient.dateBirth}
         pesel={patient.pesel}
+        address={patient.address}
+        nip={patient.nip}
+        dateRegister={patient.dateRegister}
+        email={patient.email}
       />
     ));
   };
