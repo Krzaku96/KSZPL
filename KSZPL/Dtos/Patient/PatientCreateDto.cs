@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace KSZPL.Api.Dtos.Patient
 {
-    public class PatientDto
+    public class PatientCreateDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime DateRegister { get; set; }
