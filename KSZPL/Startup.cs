@@ -91,16 +91,10 @@ namespace KSZPL.Api
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHttpsRedirection();
-            }
+            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
-            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
+            app.UseHttpsRedirection();
+        
             app.UseSwagger();
             app.UseSwaggerUI(
                 options => { options.SwaggerEndpoint("/swagger/KSZPL-Core/swagger.json", "KSZPL Server"); });

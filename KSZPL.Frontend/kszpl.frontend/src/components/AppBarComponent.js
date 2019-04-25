@@ -16,28 +16,40 @@ class AppBarComponent extends Component {
             >
               Home
             </Nav.Link>
-            <NavDropdown className="color-white" title="Your account">
-              <NavDropdown.Item onClick={this.props.redirectToDetails}>
-                Details
-              </NavDropdown.Item>
-              {this.props.role === "Admin" ? (
-                <div>
-                  <NavDropdown.Item onClick={this.props.redirectToAddUser}>
-                    Add user
-                  </NavDropdown.Item>
-                  <NavDropdown.Item onClick={this.props.showUsersOnClick}>
-                    Show users
-                  </NavDropdown.Item>
-                </div>
-              ) : null}
-              <NavDropdown.Item onClick={this.props.redirectToUpdateUser}>
-                Change password
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item onClick={this.props.logout}>
-                Logout
-              </NavDropdown.Item>
-            </NavDropdown>
+            {this.props.role === "Receptionist" ? (
+              <NavDropdown className="color-white" title="Pacients">
+                <NavDropdown.Item onClick={this.props.redirectToAddPatient}>
+                  Dodaj pacjenta
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={this.props.showPatients}>
+                  Lista pacjentów
+                </NavDropdown.Item>
+              </NavDropdown>
+            ) : null}
+            {this.props.role === null ? null : (
+              <NavDropdown className="color-white" title="Your account">
+                <NavDropdown.Item onClick={this.props.redirectToDetails}>
+                  Details
+                </NavDropdown.Item>
+                {this.props.role === "Admin" ? (
+                  <div>
+                    <NavDropdown.Item onClick={this.props.redirectToAddUser}>
+                      Add user
+                    </NavDropdown.Item>
+                    <NavDropdown.Item onClick={this.props.showUsersOnClick}>
+                      Show users
+                    </NavDropdown.Item>
+                  </div>
+                ) : null}
+                <NavDropdown.Item onClick={this.props.redirectToUpdateUser}>
+                  Change password
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={this.props.logout}>
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

@@ -8,7 +8,8 @@ class AppBarContainer extends Component {
   state = {
     username: "",
     role: "",
-    users: []
+    users: [],
+    patients: []
   };
 
   componentWillMount = () => {
@@ -36,6 +37,15 @@ class AppBarContainer extends Component {
     });
   };
 
+  redirectToShowPatients = () => {
+    return this.props.history.push({
+      pathname: "/showPatients",
+      state: {
+        patients: this.state.patients
+      }
+    });
+  }
+
   redirectToAddUser = () => {
     return this.props.history.push({
       pathname: "/createUser"
@@ -45,6 +55,12 @@ class AppBarContainer extends Component {
   redirectToUpdateUser = () => {
     return this.props.history.push({
       pathname: "/changePassword"
+    });
+  };
+  
+  redirectToAddPatient = () => {
+    return this.props.history.push({
+      pathname: "/createPatient"
     });
   };
   
@@ -74,8 +90,30 @@ class AppBarContainer extends Component {
     });
   };
 
+  showPatients = event => {
+    event.preventDefault();
+
+    let axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    };
+
+    axios.get(BASE_URL + "Patient", axiosConfig).then(response => {
+      if (response.data) {
+        this.setState({ patients: response.data });
+        console.log(response);
+        this.redirectToShowPatients();
+      } else {
+        console.log("Can't find response");
+      }
+    });
+  }
+
   logout = () => {
     localStorage.clear();
+    this.redirectToHome();
     window.location.reload();
   };
 
@@ -86,9 +124,11 @@ class AppBarContainer extends Component {
         redirectToDetails={this.redirectToDetails}
         redirectToAddUser={this.redirectToAddUser}
         redirectToUpdateUser={this.redirectToUpdateUser}
+        redirectToAddPatient={this.redirectToAddPatient}
         user={this.props.user}
         role={this.state.role}
         showUsersOnClick={this.showUsersOnClick}
+        showPatients={this.showPatients}
         logout={this.logout}
       />
     );

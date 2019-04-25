@@ -18,86 +18,55 @@ namespace KSZPL.Api.Controllers
     {
         private readonly KSZPLDbContext _dbContext;
         private readonly IMapper _mapper;
-        private readonly IRepository<Patient> _repository;
+        private readonly IPatientService _patientService;
 
-        public PatientController(KSZPLDbContext dbContext, IMapper mapper, IRepository<Patient> repository)
+        public PatientController(KSZPLDbContext dbContext, IMapper mapper, IPatientService patientService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
-            _repository = repository;
+            _patientService = patientService;
         }
 
         [AllowAnonymous]
         [HttpPost("registerpatient")]
-        public IActionResult RegisterPatient([FromBody]PatientDto patientDto)
+        public IActionResult RegisterPatient([FromBody]PatientCreateDto patientDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
             var patient = _mapper.Map<Patient>(patientDto);
+            _patientService.Add(patient);
 
-            return Ok(_repository.Add(patient));
-
+            return Ok();
         }
 
         [AllowAnonymous]
-        [HttpPut("editpatient")]
+        [HttpPut]
         public IActionResult EditPatient([FromBody]PatientDto patientDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
             var patient = _mapper.Map<Patient>(patientDto);
+            _patientService.Update(patient);
 
-            return Ok(_repository.Update(patient));
+            return Ok();
         }
-
+        
         [AllowAnonymous]
-        [HttpDelete("deletepatient/{id}")]
+        [HttpDelete("{id}")]
         public IActionResult DeletePatient(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            var patient = _dbContext.Patients.FirstOrDefault(x => x.Id == id);
-
-            return Ok(_repository.Delete(patient));
+            _patientService.Delete(id);
+            return Ok();
         }
-
+        
         [AllowAnonymous]
-        [HttpGet("getallpatients")]
+        [HttpGet]
         public IActionResult GetAllPatients()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            var patients = _repository.GetAll();
-            var patientDtos = _mapper.Map<IList<PatientDto>>(patients);
-            return Ok(patientDtos);
+            return Ok(_patientService.GetAll());
         }
 
         [AllowAnonymous]
-        [HttpGet("getpatient/{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetPatient(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            var patient = _repository.GetById(id);
-            var patientDto = _mapper.Map<PatientDto>(patient);
-            return Ok(patientDto);
+            return Ok(_patientService.GetById(id));
         }
-
-
     }
 }
