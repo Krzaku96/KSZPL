@@ -14,6 +14,10 @@ namespace KSZPL.Core.Modules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<Repository<Visit>>().As<IRepository<Visit>>().InstancePerDependency();
+            builder.RegisterType<Repository<Patient>>().As<IRepository<Patient>>().InstancePerDependency();
+            builder.RegisterType<Repository<User>>().As<IRepository<User>>().InstancePerDependency();
+            builder.RegisterType<VisitService>().As<IVisitService>().InstancePerDependency();
+            builder.RegisterType<Repository<PatientCard>>().As<IRepository<PatientCard>>().InstancePerDependency();
         }
     }
 }
