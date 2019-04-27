@@ -58,7 +58,7 @@ class ShowVisitComponent extends Component {
 
         return(
             <Row>
-                <Form horizontal>
+                <Form horizontal className="formVisit">
                     <Col sm={12}> 
                     <Form.Label className="labelVisit"> <b>  Informacje o wizycie </b>  </Form.Label>
                     </Col>

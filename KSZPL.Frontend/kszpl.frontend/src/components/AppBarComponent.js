@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import "../styles/sidebar.css";
+import '../styles/sidebar.css';
+
+import React, { Component } from 'react';
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 class AppBarComponent extends Component {
   render() {
@@ -38,6 +39,14 @@ class AppBarComponent extends Component {
                 Logout
               </NavDropdown.Item>
             </NavDropdown>
+            <NavDropdown title="Wizyty">
+              <NavDropdown.Item onClick={this.props.redirectToListVisits}>
+                Wizyty
+              </NavDropdown.Item>
+              <NavDropdown.Item onClick={this.props.redirectToCreateVisit}>
+                Stworz wizytę
+              </NavDropdown.Item>
+              </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

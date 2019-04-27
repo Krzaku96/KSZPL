@@ -7,6 +7,7 @@ import {Button} from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import "../../styles/visit.css";
 
 class CreateVisitComponent extends Component {
 
@@ -17,7 +18,7 @@ class CreateVisitComponent extends Component {
             dateVisit: new Date(),
             description: '', 
             place: '',
-            id: null,
+            id: 0,
             patientCardId: 1,
             status: '',
             userId: 1,
@@ -64,6 +65,14 @@ class CreateVisitComponent extends Component {
         this.setState({status: event.target.value});
     }
 
+    onChangePatientCardId = (event) => {
+        this.setState({patientCardId: event.target.value});
+      }
+    
+    onChangeDoctorId = (event) => {
+        this.setState({userId: event.target.value});
+      }
+
     onChangeDateVisit = dateVisit => this.setState({ dateVisit })
 
 
@@ -76,7 +85,7 @@ class CreateVisitComponent extends Component {
             Accept: "application/json"
             }
         };
-            axios.post(BASE_URL + '/visit/createvisit', {dateVisit: this.state.dateVisit, description: this.state.description, id: 0, patientCardId: this.state.patientCardId, place: this.state.place, status: this.state.status, userId: this.state.userId },axiosConfig)
+            axios.post(BASE_URL + '/visit/createvisit', {dateVisit: this.state.dateVisit, description: this.state.description, id: 0, place: this.state.place, status: this.state.status, userId: this.state.userId, patientCardId: this.state.patientCardId },axiosConfig)
             .then(()=>{
                 window.confirm('Wizyta została dodana!');
             })
@@ -91,7 +100,7 @@ class CreateVisitComponent extends Component {
 
         return(
             <Row>
-                <Form horizontal>
+                <Form horizontal className="formVisit">
                     <Row>
                         <Col sm={12}> <Form.Label> Termin wizyty: </Form.Label> </Col>
                         <Col sm={12}> 
@@ -114,7 +123,7 @@ class CreateVisitComponent extends Component {
                     <Row>
                         <Col sm={12}> <Form.Label> Imię i nazwisko pacjenta: </Form.Label> </Col>
                         <Col sm={12}>
-                            <FormControl as="select"  value={this.value}>
+                            <FormControl as="select" value={this.state.patientCardId}  onChange={this.onChangePatientCardId} >
                             {this.createOptionsPatients()}
                             </FormControl>
                         </Col>
@@ -134,7 +143,7 @@ class CreateVisitComponent extends Component {
                     <Row>
                         <Col sm={12}> <Form.Label> Imię i nazwisko lekarza: </Form.Label> </Col>
                         <Col sm={12}>
-                            <FormControl as="select" value={this.value}>
+                            <FormControl as="select" value={this.state.userId} onChange={this.onChangeDoctorId} >
                             {this.createOptionsDoctors()}
                             </FormControl>
                         </Col>

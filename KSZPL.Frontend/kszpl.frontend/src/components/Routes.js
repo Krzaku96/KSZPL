@@ -9,6 +9,7 @@ import CreateUserContainer from "../containers/CreateUserContainer";
 import UpdateUserContainer from "../containers/UpdateUserContainer";
 import SuccessAddUserComponent from "./SuccessAddUserComponent";
 import UpdateVisitComponent from "./Visit/UpdateVisitComponent";
+import ListVisitsComponent from "./Visit/ListVisitsComponent";
 
 class Routes extends Component {
   render() {
@@ -20,6 +21,7 @@ class Routes extends Component {
                 <Route exact path="/visit/createvisit" component={CreateVisitComponent}></Route>
                 <Route exact path="/visit/:id" component={ShowVisitComponent}></Route>
                 <Route exact path="/visit/update/:id" component={UpdateVisitComponent}></Route>
+                <Route exact path="/listvisits" component={ListVisitsComponent}></Route>
                 <Route exact path="/showUsers" component={ShowUsersComponent}></Route>
                 <Route exact path="/createUser" component={CreateUserContainer}></Route>
                 <Route exact path="/changePassword" component={UpdateUserContainer}></Route>

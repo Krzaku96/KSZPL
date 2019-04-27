@@ -14,5 +14,6 @@ namespace KSZPL.Core.Interfaces
         ShowVisitDto CreateModelToShowVisit(int id);
         GetEditVisitDto CreateModelToEditVisit(int id);
         int GetPatientCardId(int patientId);
+        List<ShowVisitDto> CreateModelToListAllVisits();
     }
 }

@@ -9,6 +9,7 @@ import DatePicker from "react-datepicker";
 import "../../styles/visit.css";
 
 
+
 class UpdateVisitComponent extends Component {
     constructor()
     {
@@ -20,7 +21,6 @@ class UpdateVisitComponent extends Component {
             id: null,
             status: '',
             userId: 0,
-            doctorId: 0,
             patientId: 0,
             patients: [],
             doctors: []
@@ -38,7 +38,6 @@ class UpdateVisitComponent extends Component {
                     id: response.data.id,
                     status: response.data.status,
                     userId: response.data.userId,
-                    doctorId: response.data.doctorId,
                     patientId: response.data.patientId,
                     patients: response.data.patients,
                     doctors: response.data.doctors
@@ -84,7 +83,7 @@ class UpdateVisitComponent extends Component {
       }
     
     onChangeDoctorId = (event) => {
-        this.setState({doctorId: event.target.value});
+        this.setState({userId: event.target.value});
       }
 
     updateVisit = event => {
@@ -98,6 +97,7 @@ class UpdateVisitComponent extends Component {
             axios.put(BASE_URL + '/visit/editvisit', {dateVisit: this.state.dateVisit, description: this.state.description, id: this.state.id, patientId: this.state.patientId, place: this.state.place, status: this.state.status, userId: this.state.userId },axiosConfig)
             .then(()=>{
                 window.confirm('Wizyta została edytowana!');
+                window.location = '/listvisits'
             })
             .catch((err)=>{
                 console.log(err);
@@ -110,7 +110,7 @@ class UpdateVisitComponent extends Component {
 
         return(
             <Row>
-                <Form horizontal>
+                <Form horizontal className="formVisit">
                 <Col sm={12}> 
                     <Form.Label className="labelVisit"> <b>  Edycja wizyty </b>  </Form.Label>
                 </Col>
@@ -157,7 +157,7 @@ class UpdateVisitComponent extends Component {
                     <Row>
                         <Col sm={12}> <Form.Label> Imię i nazwisko lekarza: </Form.Label> </Col>
                         <Col sm={12}>
-                            <FormControl as="select" onChange={this.onChangeDoctorId} value={this.state.doctorId}>
+                            <FormControl as="select" onChange={this.onChangeDoctorId} value={this.state.userId}>
                             {this.createOptionsDoctors()}
                             </FormControl>
                         </Col>

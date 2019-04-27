@@ -6,7 +6,6 @@ using AutoMapper;
 using KSZPL.Api.Dtos.Patient;
 using KSZPL.Api.Dtos.User;
 using KSZPL.Api.Dtos.Visit;
-using KSZPL.Api.ViewModels;
 using KSZPL.Core.Interfaces;
 using KSZPL.Data.Context;
 using KSZPL.Data.Models;
@@ -55,19 +54,41 @@ namespace KSZPL.Api.Controllers
             return Ok(_visitService.CreateModeltoCreateVisit());
         }
 
-
-
         [AllowAnonymous]
         [HttpPut("editvisit")]
-        public IActionResult EditVisit([FromBody]VisitDto visitDto)
+        public IActionResult EditVisit([FromBody]EditVisitDto editVisitDto)
         {
-            if (visitDto.Id != 0 && !ModelState.IsValid)
+            if (editVisitDto.Id != 0 && !ModelState.IsValid)
             {
                 return BadRequest();
             }
-            var visit = _mapper.Map<Visit>(visitDto);
+
+            var patientCardId = _visitService.GetPatientCardId(editVisitDto.PatientId);
+
+            var visit = _dbContext.Visits.Where(x => x.Id == editVisitDto.Id).FirstOrDefault();
+
+            visit.PatientCardId = patientCardId;
+            visit.Id = editVisitDto.Id;
+            visit.Status = editVisitDto.Status;
+            visit.PatientCardId = patientCardId;
+            visit.UserId = editVisitDto.UserId;
+            visit.Description = editVisitDto.Description;
+            visit.Place = editVisitDto.Place;
+            visit.DateVisit = editVisitDto.DateVisit;
 
             return Ok(_repository.Update(visit));
+        }
+
+        [AllowAnonymous]
+        [HttpGet("editvisit/{id}")]
+        public IActionResult EditVisit(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return Ok(_visitService.CreateModelToEditVisit(id));
         }
 
         [AllowAnonymous]
@@ -94,9 +115,9 @@ namespace KSZPL.Api.Controllers
                 return BadRequest();
             }
 
-            var visits = _repository.GetAll();
-            var visitDtos = _mapper.Map<IList<VisitDto>>(visits);
-            return Ok(visitDtos);
+          //  var visits = _repository.GetAll();
+          //  var visitDtos = _mapper.Map<IList<VisitDto>>(visits);
+            return Ok(_visitService.CreateModelToListAllVisits());
         }
 
         [AllowAnonymous]

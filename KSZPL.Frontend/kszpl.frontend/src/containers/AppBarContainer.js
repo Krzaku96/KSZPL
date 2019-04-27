@@ -47,6 +47,18 @@ class AppBarContainer extends Component {
       pathname: "/changePassword"
     });
   };
+
+  redirectToListVisits = () => {
+    return this.props.history.push({
+      pathname: "/listvisits"
+    });
+  };
+
+  redirectToCreateVisit= () => {
+    return this.props.history.push({
+      pathname: "/visit/createvisit"
+    });
+  };
   
   checkRole = () => {
     var role = JSON.parse(localStorage.getItem("role"));
@@ -90,6 +102,8 @@ class AppBarContainer extends Component {
         role={this.state.role}
         showUsersOnClick={this.showUsersOnClick}
         logout={this.logout}
+        redirectToListVisits={this.redirectToListVisits}
+        redirectToCreateVisit={this.redirectToCreateVisit}
       />
     );
   }
