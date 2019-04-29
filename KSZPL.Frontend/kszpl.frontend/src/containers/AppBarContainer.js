@@ -57,6 +57,18 @@ class AppBarContainer extends Component {
       pathname: "/changePassword"
     });
   };
+
+  redirectToListVisits = () => {
+    return this.props.history.push({
+      pathname: "/listvisits"
+    });
+  };
+
+  redirectToCreateVisit= () => {
+    return this.props.history.push({
+      pathname: "/visit/createvisit"
+    });
+  };
   
   redirectToAddPatient = () => {
     return this.props.history.push({
@@ -130,6 +142,8 @@ class AppBarContainer extends Component {
         showUsersOnClick={this.showUsersOnClick}
         showPatients={this.showPatients}
         logout={this.logout}
+        redirectToListVisits={this.redirectToListVisits}
+        redirectToCreateVisit={this.redirectToCreateVisit}
       />
     );
   }

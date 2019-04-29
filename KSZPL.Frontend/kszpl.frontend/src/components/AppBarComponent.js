@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import "../styles/sidebar.css";
+import '../styles/sidebar.css';
+
+import React, { Component } from 'react';
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 class AppBarComponent extends Component {
   render() {
@@ -16,6 +17,36 @@ class AppBarComponent extends Component {
             >
               Home
             </Nav.Link>
+            <NavDropdown className="color-white" title="Your account">
+              <NavDropdown.Item onClick={this.props.redirectToDetails}>
+                Details
+              </NavDropdown.Item>
+              {this.props.role === "Admin" ? (
+                <div>
+                  <NavDropdown.Item onClick={this.props.redirectToAddUser}>
+                    Add user
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={this.props.showUsersOnClick}>
+                    Show users
+                  </NavDropdown.Item>
+                </div>
+              ) : null}
+              <NavDropdown.Item onClick={this.props.redirectToUpdateUser}>
+                Change password
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={this.props.logout}>
+                Logout
+              </NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown title="Wizyty">
+              <NavDropdown.Item onClick={this.props.redirectToListVisits}>
+                Wizyty
+              </NavDropdown.Item>
+              <NavDropdown.Item onClick={this.props.redirectToCreateVisit}>
+                Stworz wizytę
+              </NavDropdown.Item>
+              </NavDropdown>
             {this.props.role === "Receptionist" ? (
               <NavDropdown className="color-white" title="Pacients">
                 <NavDropdown.Item onClick={this.props.redirectToAddPatient}>
