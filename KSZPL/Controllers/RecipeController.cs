@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using KSZPL.Api.Dtos.Recipe;
+using KSZPL.Core.Interfaces;
 using KSZPL.Data.Context;
 using KSZPL.Data.Models;
 using KSZPL.Data.Repository;
@@ -18,12 +19,14 @@ namespace KSZPL.Api.Controllers
         private readonly KSZPLDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly IRepository<Recipe> _repository;
+        private readonly IRecipeService _recipeService;
 
-        public RecipeController(KSZPLDbContext dbContext, IMapper mapper, IRepository<Recipe> repository)
+        public RecipeController(KSZPLDbContext dbContext, IMapper mapper, IRepository<Recipe> repository, IRecipeService recipeService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _repository = repository;
+            _recipeService = recipeService;
         }
 
         [AllowAnonymous]
@@ -39,6 +42,13 @@ namespace KSZPL.Api.Controllers
 
             return Ok(_repository.Add(recipe));
 
+        } 
+
+        [AllowAnonymous]
+        [HttpGet("registerrecipe/{idVisit}")]
+        public IActionResult RegisterRecipe(int idVisit)
+        {
+            return Ok(_recipeService.CreateModelToRegisterRecipe(idVisit));
         }
 
         [AllowAnonymous]
