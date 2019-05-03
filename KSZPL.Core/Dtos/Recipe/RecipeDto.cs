@@ -9,6 +9,7 @@ namespace KSZPL.Core.Dtos.Recipe
         public int Id { get; set; }
         public int PatientCardId { get; set; }
         public int UserId { get; set; }
+        public int VisitId { get; set; }
         public DateTime DateRelease { get; set; }
         public string PrescribedMedicines { get; set; }
     }

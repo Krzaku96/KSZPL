@@ -17,6 +17,9 @@ namespace KSZPL.Data.Models
         [ForeignKey("User")]
         public int UserId { get; set; }
 
+        [ForeignKey("Visit")]
+        public int VisitId { get; set; }
+
         public DateTime DateRelease { get; set; }
 
         public string PrescribedMedicines { get; set; }
