@@ -187,6 +187,61 @@ namespace KSZPL.Core.Services
             return listVisits;
         }
 
+        public List<ShowVisitDto> CreateModelToFindVisit(int idPatient, int idDoctor, string dateVisitString)
+        {
+            var allVisit = _repositoryVisit.GetAll();
+            var visitsDto = _mapper.Map<IList<VisitDto>>(allVisit);
+            var allPatient = _repositoryPatient.GetAll();
+            var patientsDto = _mapper.Map<IList<PatientDto>>(allPatient);
+            var allUsers = _repositoryUser.GetAll();
+            var usersDto = _mapper.Map<IList<UserDto>>(allUsers);
+
+
+            List<ShowVisitDto> listVisits = new List<ShowVisitDto>();
+
+            foreach (var visit in allVisit)
+            {
+                var patientName = (from p in patientsDto
+                                   where p.Id == visit.PatientCardId
+                                   select p.Name).FirstOrDefault();
+                var patientSurname = (from p in patientsDto
+                                      where p.Id == visit.PatientCardId
+                                      select p.Surname).FirstOrDefault();
+
+                var patient = patientName + " " + patientSurname;
+
+                var doctorFirstName = (from p in usersDto
+                                       where p.Id == visit.UserId
+                                       select p.FirstName).FirstOrDefault();
+                var doctorLastName = (from p in usersDto
+                                      where p.Id == visit.UserId
+                                      select p.LastName).FirstOrDefault();
+                var doctor = doctorFirstName + " " + doctorLastName;
+
+                listVisits.Add(new ShowVisitDto()
+                {
+                    Id = visit.Id,
+                    Status = visit.Status,
+                    PatientCardId = visit.PatientCardId,
+                    UserId = visit.UserId,
+                    Description = visit.Description,
+                    Place = visit.Place,
+                    DateVisit = visit.DateVisit,
+                    PatientName = patient,
+                    DoctorName = doctor
+                });
+            }
+
+            DateTime dateVisit = DateTime.Parse(dateVisitString);
+
+            listVisits.OrderByDescending(d => d.DateVisit);
+            var filteredList = (listVisits.Where(x => x.UserId == idDoctor).DefaultIfEmpty()
+                .Where(x => x.PatientCardId == GetPatientCardId(idPatient)).DefaultIfEmpty()
+                .Where(x => x.DateVisit != null &&  x.DateVisit.Date == dateVisit).DefaultIfEmpty()).ToList();
+
+            return filteredList;
+        }
+
         public GetEditVisitDto CreateModelToEditVisit(int id)
         {
             var allVisit = _repositoryVisit.GetAll();

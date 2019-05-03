@@ -22,7 +22,6 @@ class ListVisitsComponent extends Component{
         axios.get(BASE_URL + "visit/getallvisit").then(response => {
           if (response.data) {
             this.setState({ visits: response.data });
-            console.log(response);
             this.redirectToListVisits();
           } 
           else 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import { Col, Form, Row } from 'react-bootstrap';
+import { Col, Form, Row, Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 
 import { BASE_URL } from '../../constants';
@@ -16,7 +16,7 @@ class ShowVisitComponent extends Component {
             dateVisit: new Date(),
             description: '', 
             place: '',
-            id: null,
+            id: 0,
             patientCardId: 0,
             status: '',
             userId: 0,
@@ -54,6 +54,12 @@ class ShowVisitComponent extends Component {
         )
     }
 
+
+      OnClickEdit = (visitId) => {
+          debugger;
+        window.location = '/visit/update/'+ visitId;
+      }
+
     render(){
 
         return(
@@ -86,6 +92,7 @@ class ShowVisitComponent extends Component {
                         <Col sm={5}> <Form.Label><b> Lekarz: </b></Form.Label> </Col>
                         <Col sm={7}> <Form.Label> {this.state.doctorName} </Form.Label> </Col>
                     </Row>
+                    <Button onClick={() => this.OnClickEdit(this.state.id)} className="btn btn-primary">Edytuj</Button>
                     </Form>
             </Row>
         )

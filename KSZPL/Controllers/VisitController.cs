@@ -115,8 +115,6 @@ namespace KSZPL.Api.Controllers
                 return BadRequest();
             }
 
-          //  var visits = _repository.GetAll();
-          //  var visitDtos = _mapper.Map<IList<VisitDto>>(visits);
             return Ok(_visitService.CreateModelToListAllVisits());
         }
 
@@ -130,6 +128,13 @@ namespace KSZPL.Api.Controllers
             }
 
             return Ok(_visitService.CreateModelToShowVisit(id));
+        }
+
+        [AllowAnonymous]
+        [HttpGet("find/{idPatient}/{idDoctor}/{dateVisit}")]
+        public IActionResult FindVisit(int idPatient, int idDoctor, string dateVisit)
+        {
+            return Ok(_visitService.CreateModelToFindVisit(idPatient, idDoctor, dateVisit));
         }
 
 

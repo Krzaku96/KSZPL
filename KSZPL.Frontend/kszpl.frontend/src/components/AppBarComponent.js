@@ -41,10 +41,13 @@ class AppBarComponent extends Component {
             </NavDropdown>
             <NavDropdown title="Wizyty">
               <NavDropdown.Item onClick={this.props.redirectToListVisits}>
-                Wizyty
+                Harmonogram wizyt
               </NavDropdown.Item>
               <NavDropdown.Item onClick={this.props.redirectToCreateVisit}>
                 Stworz wizytę
+              </NavDropdown.Item>
+              <NavDropdown.Item onClick={this.props.redirectToSearchVisit}>
+                Wyszukaj wizytę
               </NavDropdown.Item>
               </NavDropdown>
             {this.props.role === "Receptionist" ? (
@@ -57,30 +60,6 @@ class AppBarComponent extends Component {
                 </NavDropdown.Item>
               </NavDropdown>
             ) : null}
-            {this.props.role === null ? null : (
-              <NavDropdown className="color-white" title="Your account">
-                <NavDropdown.Item onClick={this.props.redirectToDetails}>
-                  Details
-                </NavDropdown.Item>
-                {this.props.role === "Admin" ? (
-                  <div>
-                    <NavDropdown.Item onClick={this.props.redirectToAddUser}>
-                      Add user
-                    </NavDropdown.Item>
-                    <NavDropdown.Item onClick={this.props.showUsersOnClick}>
-                      Show users
-                    </NavDropdown.Item>
-                  </div>
-                ) : null}
-                <NavDropdown.Item onClick={this.props.redirectToUpdateUser}>
-                  Change password
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={this.props.logout}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
-            )}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
