@@ -75,6 +75,12 @@ class AppBarContainer extends Component {
       pathname: "/createPatient"
     });
   };
+
+  redirectToSearchVisit = () => {
+    return this.props.history.push({
+      pathname: "/searchvisit"
+    });
+  };
   
   checkRole = () => {
     var role = JSON.parse(localStorage.getItem("role"));
@@ -144,6 +150,7 @@ class AppBarContainer extends Component {
         logout={this.logout}
         redirectToListVisits={this.redirectToListVisits}
         redirectToCreateVisit={this.redirectToCreateVisit}
+        redirectToSearchVisit={this.redirectToSearchVisit}
       />
     );
   }
