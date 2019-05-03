@@ -96,8 +96,6 @@ class CreateVisitComponent extends Component {
 
 
     render(){
-
-
         return(
             <Row>
                 <Form horizontal className="formVisit">

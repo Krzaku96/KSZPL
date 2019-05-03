@@ -1,11 +1,12 @@
+import '../../styles/visit.css';
+
 import axios from 'axios';
+import moment from 'moment';
 import React, { Component } from 'react';
-import { Col, Form, Row, Button } from 'react-bootstrap';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 
 import { BASE_URL } from '../../constants';
-import "../../styles/visit.css";
-import moment from 'moment';
 
 
 class ShowVisitComponent extends Component {
@@ -60,6 +61,10 @@ class ShowVisitComponent extends Component {
         window.location = '/visit/update/'+ visitId;
       }
 
+      OnClickReturn = () => {
+      window.location = '/searchvisit'
+    }
+
     render(){
 
         return(
@@ -92,7 +97,10 @@ class ShowVisitComponent extends Component {
                         <Col sm={5}> <Form.Label><b> Lekarz: </b></Form.Label> </Col>
                         <Col sm={7}> <Form.Label> {this.state.doctorName} </Form.Label> </Col>
                     </Row>
-                    <Button onClick={() => this.OnClickEdit(this.state.id)} className="btn btn-primary">Edytuj</Button>
+                    <Row>
+                    <Col sm={5}> <Button onClick={() => this.OnClickReturn()} className="btn btn-light">Wroc</Button> </Col>
+                    <Col sm={5}> <Button onClick={() => this.OnClickEdit(this.state.id)} className="btn btn-primary">Edytuj</Button> </Col>
+                    </Row>
                     </Form>
             </Row>
         )

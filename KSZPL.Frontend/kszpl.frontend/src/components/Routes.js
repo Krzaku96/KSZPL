@@ -14,6 +14,7 @@ import EditPatientContainer from "../containers/EditPatientContainer";
 import UpdateVisitComponent from "./Visit/UpdateVisitComponent";
 import ListVisitsComponent from "./Visit/ListVisitsComponent";
 import SearchVisitComponent from "./Visit/SearchVisitComponent";
+import CreateRecipeComponent from "./Recipe/CreateRecipeComponent";
 
 class Routes extends Component {
   render() {
@@ -34,6 +35,7 @@ class Routes extends Component {
                 <Route exact path="/createPatient" component={CreatePacientContainer}></Route>
                 <Route exact path="/showPatients" component={ShowPatientsComponent}></Route>
                 <Route exact path="/editPatient" component={EditPatientContainer}></Route>
+                <Route exact path="/createRecipe/:id" component={CreateRecipeComponent}></Route>
             </Switch>
         </div>
     );

@@ -51,6 +51,7 @@ class SearchVisitComponent extends Component{
                 <td>{visit.patientName}</td>
                 <td>{visit.doctorName}</td>
                 <td> <Button variant="info" onClick={() => this.OnClickMoreInfo(visit.id)}>Więcej</Button> </td>
+                <td> <Button variant="primary" onClick={() => this.OnClickAddRecipe(visit.id)}>Dodaj receptę</Button> </td>
             </tr>
             ));
     }
@@ -83,6 +84,10 @@ class SearchVisitComponent extends Component{
   OnClickMoreInfo = (visitId) => {
       debugger;
     window.location = '/visit/' + visitId;
+  }
+
+  OnClickAddRecipe = (visitId) => {
+      window.location = '/createrecipe/' + visitId;
   }
   
 

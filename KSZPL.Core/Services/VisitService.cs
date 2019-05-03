@@ -237,7 +237,7 @@ namespace KSZPL.Core.Services
             listVisits.OrderByDescending(d => d.DateVisit);
             var filteredList = (listVisits.Where(x => x.UserId == idDoctor).DefaultIfEmpty()
                 .Where(x => x.PatientCardId == GetPatientCardId(idPatient)).DefaultIfEmpty()
-                .Where(x => x.DateVisit != null &&  x.DateVisit.Date == dateVisit).DefaultIfEmpty()).ToList();
+                .Where(x => x!= null &&  x.DateVisit.Date == dateVisit).DefaultIfEmpty()).ToList();
 
             return filteredList;
         }
