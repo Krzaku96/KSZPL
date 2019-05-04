@@ -15,6 +15,7 @@ import UpdateVisitComponent from "./Visit/UpdateVisitComponent";
 import ListVisitsComponent from "./Visit/ListVisitsComponent";
 import SearchVisitComponent from "./Visit/SearchVisitComponent";
 import CreateRecipeComponent from "./Recipe/CreateRecipeComponent";
+import ListPatientCardsComponent from "./PatientCard/ListPatientCardsComponent";
 
 class Routes extends Component {
   render() {
@@ -36,6 +37,7 @@ class Routes extends Component {
                 <Route exact path="/showPatients" component={ShowPatientsComponent}></Route>
                 <Route exact path="/editPatient" component={EditPatientContainer}></Route>
                 <Route exact path="/createRecipe/:id" component={CreateRecipeComponent}></Route>
+                <Route exact path="/listpatientcards" component={ListPatientCardsComponent}></Route>
             </Switch>
         </div>
     );
