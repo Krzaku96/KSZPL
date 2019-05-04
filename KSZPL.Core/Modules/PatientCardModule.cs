@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using KSZPL.Core.Interfaces;
+using KSZPL.Core.Services;
 using KSZPL.Data.Models;
 using KSZPL.Data.Repository;
 using System;
@@ -12,6 +14,7 @@ namespace KSZPL.Core.Modules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<Repository<PatientCard>>().As<IRepository<PatientCard>>().InstancePerDependency();
+            builder.RegisterType<PatientCardService>().As<IPatientCardService>().InstancePerDependency();
         }
     }
 }

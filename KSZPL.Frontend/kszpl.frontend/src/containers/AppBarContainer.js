@@ -81,6 +81,12 @@ class AppBarContainer extends Component {
       pathname: "/searchvisit"
     });
   };
+
+  redirectToListPatientCards = () => {
+    return this.props.history.push({
+      pathname: "/listpatientcards"
+    })
+  }
   
   checkRole = () => {
     var role = JSON.parse(localStorage.getItem("role"));
@@ -151,6 +157,7 @@ class AppBarContainer extends Component {
         redirectToListVisits={this.redirectToListVisits}
         redirectToCreateVisit={this.redirectToCreateVisit}
         redirectToSearchVisit={this.redirectToSearchVisit}
+        redirectToListPatientCards={this.redirectToListPatientCards}
       />
     );
   }

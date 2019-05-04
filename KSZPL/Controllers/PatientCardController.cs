@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KSZPL.Api.Dtos.PatientCard;
+using KSZPL.Core.Interfaces;
 using KSZPL.Data.Context;
 using KSZPL.Data.Models;
 using KSZPL.Data.Repository;
@@ -18,12 +19,14 @@ namespace KSZPL.Api.Controllers
         private readonly KSZPLDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly IRepository<PatientCard> _repository;
+        private readonly IPatientCardService _patientCardService;
 
-        public PatientCardController(KSZPLDbContext dbContext, IMapper mapper, IRepository<PatientCard> repository)
+        public PatientCardController(KSZPLDbContext dbContext, IMapper mapper, IRepository<PatientCard> repository, IPatientCardService patientCardService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _repository = repository;
+            _patientCardService = patientCardService;
         }
 
         [AllowAnonymous]
@@ -78,9 +81,10 @@ namespace KSZPL.Api.Controllers
                 return BadRequest();
             }
 
-            var patientCards = _repository.GetAll();
-            var patientCardDtos = _mapper.Map<IList<PatientCardDto>>(patientCards);
-            return Ok(patientCardDtos);
+            //var patientCards = _repository.GetAll();
+            //var patientCardDtos = _mapper.Map<IList<PatientCardDto>>(patientCards);
+
+            return Ok(_patientCardService.CreateModelToListAllPatientCards());
         }
 
         [AllowAnonymous]

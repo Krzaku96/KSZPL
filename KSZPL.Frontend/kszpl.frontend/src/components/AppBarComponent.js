@@ -50,8 +50,8 @@ class AppBarComponent extends Component {
                 Wyszukaj wizytę
               </NavDropdown.Item>
               </NavDropdown>
-            {this.props.role === "Receptionist" ? (
-              <NavDropdown className="color-white" title="Pacients">
+            
+              <NavDropdown className="color-white" title="Pacjenci">
                 <NavDropdown.Item onClick={this.props.redirectToAddPatient}>
                   Dodaj pacjenta
                 </NavDropdown.Item>
@@ -59,7 +59,12 @@ class AppBarComponent extends Component {
                   Lista pacjentów
                 </NavDropdown.Item>
               </NavDropdown>
-            ) : null}
+              <NavDropdown className="color-white" title="Karty pacjentow">
+                <NavDropdown.Item onClick={this.props.redirectToListPatientCards}>
+                  Lista kart pacjentow
+                </NavDropdown.Item>
+              </NavDropdown>
+            
           </Nav>
         </Navbar.Collapse>
       </Navbar>
