@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BASE_URL } from "../../constants";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
-import { Col, FormControl, Form, Row } from 'react-bootstrap';
+import { Col, FormControl, Form, Row, Card } from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 
@@ -109,6 +109,8 @@ class UpdateVisitComponent extends Component {
 
 
         return(
+            <Card>
+            <Card.Body>
             <Row>
                 <Form horizontal className="formVisit">
                 <Col sm={12}> 
@@ -175,6 +177,8 @@ class UpdateVisitComponent extends Component {
                     </Row>
                     </Form>
             </Row>
+            </Card.Body>
+            </Card>
         )
     }
 

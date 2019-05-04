@@ -66,6 +66,18 @@ namespace KSZPL.Api.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("editrecipe/{id}")]
+        public IActionResult EditRecipe(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return Ok(_recipeService.CreateModelToEditShowRecipe(id));
+        }
+
+        [AllowAnonymous]
         [HttpDelete("deleterecipe/{id}")]
         public IActionResult DeleteRecipe(int id)
         {
@@ -93,17 +105,18 @@ namespace KSZPL.Api.Controllers
             return Ok(recipeDtos);
         }
 
-        [HttpGet("getrecipe/{id}")]
-        public IActionResult GetRecipe(int id)
+        [HttpGet("getrecipe/{visitId}")]
+        public IActionResult GetRecipe(int visitId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            var recipe = _repository.GetById(id);
-            var recipeDto = _mapper.Map<RecipeDto>(recipe);
-            return Ok(recipeDto);
+            //var recipe = _repository.GetById(id);
+            //var recipeDto = _mapper.Map<RecipeDto>(recipe);
+            //return Ok(recipeDto);
+            return Ok(_recipeService.ShowRecipe(visitId));
         }
 
     }

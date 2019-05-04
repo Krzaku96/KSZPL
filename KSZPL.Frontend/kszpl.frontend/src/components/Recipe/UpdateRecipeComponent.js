@@ -2,40 +2,53 @@ import React, { Component } from "react";
 import { BASE_URL } from "../../constants";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
-import {Form, FormControl, Col, Row, Card} from 'react-bootstrap';
+import { Col, FormControl, Form, Row, Card } from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 
-
-class CreateRecipeComponent extends Component{
-
+class UpdateRecipeComponent extends Component{
     constructor()
     {
         super();
         this.state = {
-            patientName: '',
-            doctorName: '',
-            patientCardId: 0, 
-            userId: 0,
+            id: 0,
             dateRelease: new Date(),
-            prescribedMedicines: '',
+            prescribedMedicines: '', 
+            doctorName: '',
+            patientName: '',
+            patientCardId: 0,
+            userId: 0,
             visitId: 0
-        }
+        } 
     }
 
     componentDidMount(){
-        axios.get(BASE_URL + `recipe/registerrecipe/${this.props.match.params.id}`)
-        .then((response) => {
-            this.setState({
-                patientName: response.data.patientName,
-                doctorName: response.data.doctorName, 
-                patientCardId: response.data.patientCardId,
-                userId: response.data.doctorId
+        axios.get( BASE_URL + `/recipe/editrecipe/${this.props.match.params.id}`)
+            .then((response) => {
+                debugger;
+                this.setState({
+                    id: response.data.id,
+                    dateRelease: response.data.dateRelease,
+                    prescribedMedicines: response.data.prescribedMedicines,
+                    doctorName: response.data.doctorName,
+                    patientName: response.data.patientName,
+                    patientCardId: response.data.patientCardId,
+                    userId: response.data.userId,
+                    visitId: response.data.visitId
+                });
+            })
+            .catch(function () {
+            
             });
-        })
     }
 
-    addRecipe = event => {
+    onChangePrescribedMedicines = (event) => {
+        this.setState({prescribedMedicines: event.target.value});
+      }
+
+    onChangeDateVisit = dateRelease => this.setState({ dateRelease })
+
+    updateRecipe = event => {
         event.preventDefault();
         let axiosConfig = {
             headers: {
@@ -43,27 +56,19 @@ class CreateRecipeComponent extends Component{
             Accept: "application/json"
             }
         };
-            axios.post(BASE_URL + '/recipe/registerrecipe', {dateRelease: this.state.dateRelease, prescribedMedicines: this.state.prescribedMedicines, id: 0, patientCardId: this.state.patientCardId, userId: this.state.userId, visitId: this.props.match.params.id},axiosConfig)
+            axios.put(BASE_URL + '/recipe/editrecipe', {dateRelease: this.state.dateRelease, prescribedMedicines: this.state.prescribedMedicines, id: this.state.id, patientCardId: this.state.patientCardId, userId: this.state.userId, visitId: this.state.visitId },axiosConfig)
             .then(()=>{
-                window.confirm('Recepta została dodana!');
+                window.confirm('Recepta została edytowana!');
             })
             .catch((err)=>{
-                console.log(err);
+                
             });
     }
-
-    onChangeDateRelease = dateRelease => this.setState({ dateRelease })
-
-    onChangePrescribedMedicines = (event) => {
-        this.setState({prescribedMedicines: event.target.value});
-      }
-
-    
 
     render(){
         return(
             <Card>
-                <Card.Body>
+            <Card.Body>
             <Row>
                 <Form horizontal className="formVisit">
                     <Row>
@@ -78,7 +83,7 @@ class CreateRecipeComponent extends Component{
                     <Row>
                         <Col sm={12}> <Form.Label> Przepisane leki: </Form.Label> </Col>
                         <Col sm={11}>
-                            <FormControl onChange={this.onChangePrescribedMedicines}  placeholder="Przepisane leki"/>
+                            <FormControl onChange={this.onChangePrescribedMedicines} defaultValue={this.state.prescribedMedicines}/>
                         </Col>
                     </Row>
                     <Row>
@@ -99,17 +104,17 @@ class CreateRecipeComponent extends Component{
                     <Row>
                         <Col sm={2}></Col>
                         <Col sm={12}>
-                            <Button onClick={this.addRecipe} className="btn btn-primary" type="submit">Dodaj receptę</Button>
+                            <Button onClick={this.updateRecipe} className="btn btn-primary" type="submit">Edytuj receptę</Button>
                         </Col>
                         <Col sm={1}></Col>
                     </Row>
                     </Form>
             </Row>
             </Card.Body>
-                </Card>
+            </Card>
         )
     }
 
 }
 
-export default withRouter(CreateRecipeComponent);
+export default UpdateRecipeComponent

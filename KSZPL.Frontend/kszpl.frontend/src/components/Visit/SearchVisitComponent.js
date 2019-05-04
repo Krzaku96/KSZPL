@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { BASE_URL } from "../../constants";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
-import VisitComponent from "./VisitComponent";
-import { Table, FormControl, Col, Row, Form, Button} from "react-bootstrap";
+import { Table, FormControl, Col, Row, Form, Button, Card} from "react-bootstrap";
 import "../../styles/visit.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -115,21 +114,23 @@ class SearchVisitComponent extends Component{
             
         return (
             <div>
+                <Card>
+                <Card.Body>
                 <Row>
-                    <Col sm={3}> </Col>
-                    <Col sm={3}> <Form.Label> <b> Doktor:</b>  </Form.Label> </Col>
-                    <Col sm={3}> <Form.Label> <b> Pacjent:</b>  </Form.Label> </Col>
-                    <Col sm={3}> </Col>
+                    <Col sm={2}> </Col>
+                    <Col sm={4}> <Form.Label> <b> Doktor:</b>  </Form.Label> </Col>
+                    <Col sm={4}> <Form.Label> <b> Pacjent:</b>  </Form.Label> </Col>
+                    <Col sm={2}> </Col>
               </Row>
                 <Row>
-                <Col sm={3}> </Col>
-                    <Col sm={3}>
+                <Col sm={2}> </Col>
+                    <Col sm={4}>
                         <FormControl as="select" value={this.state.doctorId}  onChange={this.onChangeDoctorId}>{this.createOptionsDoctors()}</FormControl>
                     </Col>
-                    <Col sm={3}>
+                    <Col sm={4}>
                         <FormControl as="select" value={this.state.patientId}  onChange={this.onChangePatientId}>{this.createOptionsPatients()}</FormControl>
                     </Col>
-                    <Col sm={3}> </Col>
+                    <Col sm={2}> </Col>
               </Row>
               <Row> <Form.Label>  </Form.Label> </Row> 
               <Row> <Col sm={12}> <Form.Label> <b> Termin wizyty: </b> </Form.Label> </Col> </Row> 
@@ -149,9 +150,10 @@ class SearchVisitComponent extends Component{
                     <Button onClick={this.findVisit} className="btn btn-primary" type="submit">Szukaj</Button>
                 </Col>
               </Row>
-              
+             </Card.Body>
+             </Card> 
               <Row> <Form.Label>  </Form.Label> </Row> 
-              <Table className="searchTable">
+              <Table>
                 <thead>
                   <tr>
                     <th>Termin</th>

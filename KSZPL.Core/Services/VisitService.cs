@@ -75,7 +75,7 @@ namespace KSZPL.Core.Services
 
                 var idPatientCard = (from x in patientCardsDto
                                      where x.PatientId == idPatient
-                                     select x.Id).First();
+                                     select x.Id).FirstOrDefault();
 
                 patientsSelectForm.Add(new SelectFormDto() { label = item, value = idPatientCard.ToString() });
             }
@@ -308,11 +308,11 @@ namespace KSZPL.Core.Services
             {
                 var idPatient = (from x in patientsDto
                                  where x.Name == item.Split(' ')[0]
-                                 select x.Id).First();
+                                 select x.Id).FirstOrDefault();
 
                 var idPatientCard = (from x in patientCardsDto
                                      where x.PatientId == idPatient
-                                     select x.Id).First();
+                                     select x.Id).FirstOrDefault();
 
                 patientsSelectForm.Add(new SelectFormDto() { label = item, value = idPatientCard.ToString() });
             }
