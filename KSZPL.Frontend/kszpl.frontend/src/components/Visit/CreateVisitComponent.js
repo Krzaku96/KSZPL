@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BASE_URL } from "../../constants";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
-import {Form, FormControl, Col, Row} from 'react-bootstrap';
+import {Form, FormControl, Col, Row, Card} from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 
@@ -97,6 +97,8 @@ class CreateVisitComponent extends Component {
 
     render(){
         return(
+            <Card>
+            <Card.Body>
             <Row>
                 <Form horizontal className="formVisit">
                     <Row>
@@ -149,7 +151,6 @@ class CreateVisitComponent extends Component {
                     <Row>
                     <Col> <Form.Label>  </Form.Label> </Col>
                     </Row>
-
                     <Row>
                         <Col sm={2}></Col>
                         <Col sm={12}>
@@ -159,6 +160,8 @@ class CreateVisitComponent extends Component {
                     </Row>
                     </Form>
             </Row>
+            </Card.Body>
+            </Card>
         )
     }
 

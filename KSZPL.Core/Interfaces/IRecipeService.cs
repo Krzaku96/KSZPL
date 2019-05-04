@@ -8,5 +8,7 @@ namespace KSZPL.Core.Interfaces
     public interface IRecipeService
     {
         RegisterRecipeDto CreateModelToRegisterRecipe(int idVisit);
+        ShowRecipeDto ShowRecipe(int idVisit);
+        ShowToEditRecipeDto CreateModelToEditShowRecipe(int idRecipe);
     }
 }
