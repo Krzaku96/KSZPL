@@ -66,6 +66,16 @@ class CreatePacientComponent extends Component {
                 onChange={this.props.handleDateOfBirthChange}
               />
             </Form.Group>
+            <Form.Group>
+              <Form.Label>Doctor</Form.Label>
+              <Form.Control
+                as="select"
+                placeholder="Doctor"
+                onChange={this.props.handleDoctorChange}
+              >
+                {this.props.createOptionsDoctors()}
+              </Form.Control>
+            </Form.Group>
             <Button type="submit">Add</Button>
           </Form>
         </Card.Body>

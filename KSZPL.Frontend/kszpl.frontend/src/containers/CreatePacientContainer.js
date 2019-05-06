@@ -14,7 +14,17 @@ class CreatePacientContainer extends Component {
     nip: null,
     pesel: "",
     dateOfBirth: "",
-    dateOfRegister: ""
+    dateOfRegister: "",
+    doctors: [],
+    doctor: ""
+  };
+
+  componentDidMount = () => {
+    axios.get(BASE_URL + "users/getDoctors").then(response => {
+      this.setState({
+        doctors: response.data
+      });
+    });
   };
 
   redirectToSuccessAdd = () => {
@@ -51,6 +61,18 @@ class CreatePacientContainer extends Component {
     this.setState({ dateOfBirth: e.target.value });
   };
 
+  handleDoctorChange = e => {
+    this.setState({ doctor: e.target.value });
+  };
+
+  createOptionsDoctors = () => {
+    return this.state.doctors.map(doctors => (
+      <option value={doctors.id} key={doctors.id}>
+        {doctors.firstName} {doctors.lastName}
+      </option>
+    ));
+  };
+
   addPatientOnClick = event => {
     event.preventDefault();
 
@@ -71,7 +93,8 @@ class CreatePacientContainer extends Component {
       nip: this.state.nip,
       dateBirth: this.state.dateOfBirth,
       dateRegister: this.state.dateOfRegister,
-      pesel: this.state.pesel
+      pesel: this.state.pesel,
+      doctor: this.state.doctor
     };
 
     axios
@@ -96,6 +119,8 @@ class CreatePacientContainer extends Component {
         handleEmailChange={this.handleEmailChange}
         handleNIPChange={this.handleNIPChange}
         handlePeselChange={this.handlePeselChange}
+        handleDoctorChange={this.handleDoctorChange}
+        createOptionsDoctors={this.createOptionsDoctors}
       />
     );
   }
