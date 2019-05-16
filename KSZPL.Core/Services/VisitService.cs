@@ -10,6 +10,7 @@ using KSZPL.Data.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace KSZPL.Core.Services
@@ -30,6 +31,47 @@ namespace KSZPL.Core.Services
             _repositoryPatientCard = repositoryPatientCard;
             _repositoryVisit = repositoryVisit;
             _mapper = mapper;
+        }
+
+        public List<ShowVisitDto> VisitsForToday()
+        {
+            var visitsForToday = _repositoryVisit.GetAll().Where(x => x.DateVisit.Date == DateTime.Today);
+            List<ShowVisitDto> listVisits = new List<ShowVisitDto>();
+
+            foreach (var visit in visitsForToday)
+            {
+                var patientCardPatientId = _repositoryPatientCard.GetAll().Where(p => p.Id == visit.PatientCardId)
+                    .Select(x => x.PatientId).SingleOrDefault();
+
+                var patient = _repositoryPatient.GetAll().SingleOrDefault(p => p.Id == patientCardPatientId);
+
+                var patientCardDoctorId = _repositoryPatientCard.GetAll().Where(p => p.Id == visit.PatientCardId)
+                    .Select(x => x.UserId).SingleOrDefault();
+
+                var doctor = _repositoryUser.GetAll().SingleOrDefault(x => x.Id == patientCardDoctorId);
+
+                listVisits.Add(new ShowVisitDto()
+                {
+                    Id = visit.Id,
+                    Status = visit.Status,
+                    PatientCardId = visit.PatientCardId,
+                    UserId = visit.UserId,
+                    Description = visit.Description,
+                    Place = visit.Place,
+                    DateVisit = visit.DateVisit,
+                    PatientName = patient.Name + " " + patient.Surname,
+                    DoctorName = doctor.FirstName + " " + doctor.LastName
+                });
+            }
+
+            listVisits.OrderByDescending(d => d.DateVisit);
+
+            return listVisits;
+        }
+
+        public IEnumerable<Visit> VisitsForDoctor(int doctorId)
+        {
+            return _repositoryVisit.GetAll().Where(x => x.UserId == doctorId);
         }
 
         public CreateVisitDto CreateModeltoCreateVisit()

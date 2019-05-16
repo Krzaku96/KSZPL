@@ -4,6 +4,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using AutoMapper;
+using KSZPL.Core.Dtos.User;
 using KSZPL.Core.Helpers;
 using KSZPL.Core.Interfaces;
 using KSZPL.Data.Context;
@@ -17,11 +19,20 @@ namespace KSZPL.Core.Services
     {
         private readonly KSZPLDbContext _context;
         private readonly AppSettings _appSettings;
+        private readonly IMapper _mapper;
 
-        public UserService(KSZPLDbContext context, IOptions<AppSettings> appSettings)
+        public UserService(KSZPLDbContext context, IOptions<AppSettings> appSettings, IMapper mapper)
         {
             _context = context;
             _appSettings = appSettings.Value;
+            _mapper = mapper;
+        }
+
+        public IEnumerable<DoctorsDto> GetDoctors()
+        {
+            var doctors = _context.Users.Where(u => u.Role == Role.Doctor);
+
+            return _mapper.Map<IEnumerable<DoctorsDto>>(doctors);
         }
 
         public User Authenticate(string username, string password)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using KSZPL.Api.Dtos.Patient;
+using KSZPL.Api.Dtos.PatientCard;
 using KSZPL.Core.Interfaces;
 using KSZPL.Data.Context;
 using KSZPL.Data.Models;
@@ -19,20 +20,69 @@ namespace KSZPL.Api.Controllers
         private readonly KSZPLDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly IPatientService _patientService;
-
-        public PatientController(KSZPLDbContext dbContext, IMapper mapper, IPatientService patientService)
+        private readonly IRepository<PatientCard> _repository;
+        private readonly IPatientCardService _patientCardService;
+        
+        public PatientController(KSZPLDbContext dbContext, IMapper mapper, IPatientService patientService, IPatientCardService patientCardService, IRepository<PatientCard> repository)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _patientService = patientService;
+            _patientCardService = patientCardService;
+            _repository = repository;
+        }
+        
+        [AllowAnonymous]
+        [HttpPost("registerpatient")]
+        public IActionResult RegisterPatient([FromBody]AddPatientDto addPatientDto)
+        {
+            var patient = new Patient
+            {
+                Address = addPatientDto.Address,
+                DateBirth = addPatientDto.DateBirth,
+                DateRegister = addPatientDto.DateRegister,
+                Email = addPatientDto.Email,
+                NIP = addPatientDto.NIP,
+                PESEL = addPatientDto.PESEL,
+                Name = addPatientDto.Name,
+                Surname = addPatientDto.Surname
+            };
+            _patientService.Add(patient);
+
+            var patientCard = new PatientCard {PatientId = patient.Id, UserId = addPatientDto.UserId};
+            _repository.Add(patientCard);
+
+            return Ok();
         }
 
         [AllowAnonymous]
-        [HttpPost("registerpatient")]
-        public IActionResult RegisterPatient([FromBody]PatientCreateDto patientDto)
+        [HttpGet("registerpatient/{address}/{dateBirth}/{dateRegister}/{email}/{nip}/{pesel}/{name}/{surname}/{userId}")]
+        public IActionResult RegisterPatientGet(
+            string address,
+            DateTime dateBirth, 
+            DateTime dateRegister,
+            string email,
+            int? nip,
+            int pesel,
+            string name,
+            string surname,
+            int userId)
         {
-            var patient = _mapper.Map<Patient>(patientDto);
+            var patient = new Patient
+            {
+                Address = address,
+                DateBirth = dateBirth,
+                DateRegister = dateRegister,
+                Email = email,
+                NIP = nip,
+                PESEL = pesel,
+                Name = name,
+                Surname = surname
+            };
             _patientService.Add(patient);
+
+            var patientCard = new PatientCard { PatientId = patient.Id, UserId = userId };
+            _repository.Add(patientCard);
 
             return Ok();
         }

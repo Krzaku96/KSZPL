@@ -30,7 +30,7 @@ parseDate(date)
     render() {
         return(
         <tr>
-        <td>{this.props.id}</td>
+        <td>{this.props.nr}</td>
         <td>{this.parseDate(this.props.dateVisit)}</td>
         <td>{this.props.description}</td>
         <td>{this.props.place}</td>

@@ -137,7 +137,18 @@ namespace KSZPL.Api.Controllers
             return Ok(_visitService.CreateModelToFindVisit(idPatient, idDoctor, dateVisit));
         }
 
+        [AllowAnonymous]
+        [HttpGet("visitsForToday")]
+        public IActionResult VisitsForToday()
+        {
+            return Ok(_visitService.VisitsForToday());
+        }
 
-
+        [AllowAnonymous]
+        [HttpGet("VisitsForDoctor/{doctorId}")]
+        public IActionResult VisitsForDoctor(int doctorId)
+        {
+            return Ok(_visitService.VisitsForDoctor(doctorId));
+        }
     }
 }

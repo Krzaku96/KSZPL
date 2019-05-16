@@ -54,7 +54,7 @@ namespace KSZPL.Core.Services
         {
             return _unitOfWork.PatientRepository.GetAll();
         }
-
+        
         public void Delete(int id)
         {
             var patient = _unitOfWork.PatientRepository.GetById(id);

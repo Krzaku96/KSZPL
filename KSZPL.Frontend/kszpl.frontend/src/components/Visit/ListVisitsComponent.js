@@ -36,6 +36,7 @@ class ListVisitsComponent extends Component{
         return this.state.visits.map((visit,id) => (
             <VisitComponent
             key={visit.id}
+            nr={id+1}
             id={visit.id}
             dateVisit={visit.dateVisit}
             description={visit.description}

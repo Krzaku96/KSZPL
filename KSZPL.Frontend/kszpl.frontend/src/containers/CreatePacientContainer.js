@@ -14,7 +14,18 @@ class CreatePacientContainer extends Component {
     nip: null,
     pesel: "",
     dateOfBirth: "",
-    dateOfRegister: ""
+    dateOfRegister: "",
+    doctors: [],
+    doctor: 0
+  };
+
+  componentDidMount = () => {
+    axios.get(BASE_URL + "users/getDoctors").then(response => {
+      this.setState({
+        doctors: response.data
+      });
+    });
+    this.setState({ dateOfRegister: moment().format("YYYY-MM-DD") });
   };
 
   redirectToSuccessAdd = () => {
@@ -51,6 +62,18 @@ class CreatePacientContainer extends Component {
     this.setState({ dateOfBirth: e.target.value });
   };
 
+  handleDoctorChange = e => {
+    this.setState({ doctor: e.target.value });
+  };
+
+  createOptionsDoctors = () => {
+    return this.state.doctors.map(doctors => (
+      <option value={doctors.id} key={doctors.id}>
+        {doctors.firstName} {doctors.lastName}
+      </option>
+    ));
+  };
+
   addPatientOnClick = event => {
     event.preventDefault();
 
@@ -61,21 +84,53 @@ class CreatePacientContainer extends Component {
       }
     };
 
-    this.setState({ dateOfRegister: moment().format("YYYY-MM-DD") });
+    // const postData = {
+    //   name: this.state.firstName,
+    //   surname: this.state.lastName,
+    //   email: this.state.email,
+    //   address: this.state.address,
+    //   nip: this.state.nip,
+    //   dateBirth: this.state.dateOfBirth,
+    //   dateRegister: this.state.dateOfRegister,
+    //   pesel: this.state.pesel,
+    //   userId: this.state.doctor
+    // };
 
-    const postData = {
-      name: this.state.firstName,
-      surname: this.state.lastName,
-      email: this.state.email,
-      address: this.state.address,
-      nip: this.state.nip,
-      dateBirth: this.state.dateOfBirth,
-      dateRegister: this.state.dateOfRegister,
-      pesel: this.state.pesel
-    };
+    // console.log(postData)
+
+    // axios
+    //   .post(BASE_URL + "Patient/registerpatient", postData, axiosConfig)
+    //   .then(response => {
+    //     if (response) {
+    //       this.redirectToSuccessAdd();
+    //     } else {
+    //       console.log("Can't find response");
+    //     }
+    //   });
 
     axios
-      .post(BASE_URL + "Patient/registerpatient", postData, axiosConfig)
+      .get(
+        BASE_URL +
+          "Patient/registerpatient/" +
+          this.state.address +
+          "/" +
+          this.state.dateOfBirth +
+          "/" +
+          this.state.dateOfRegister +
+          "/" +
+          this.state.email +
+          "/" +
+          this.state.nip +
+          "/" +
+          this.state.pesel +
+          "/" +
+          this.state.firstName +
+          "/" +
+          this.state.lastName +
+          "/" +
+          this.state.doctor,
+        axiosConfig
+      )
       .then(response => {
         if (response) {
           this.redirectToSuccessAdd();
@@ -96,6 +151,8 @@ class CreatePacientContainer extends Component {
         handleEmailChange={this.handleEmailChange}
         handleNIPChange={this.handleNIPChange}
         handlePeselChange={this.handlePeselChange}
+        handleDoctorChange={this.handleDoctorChange}
+        createOptionsDoctors={this.createOptionsDoctors}
       />
     );
   }

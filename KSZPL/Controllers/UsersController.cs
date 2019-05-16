@@ -36,6 +36,13 @@ namespace KSZPL.Api.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("getDoctors")]
+        public IActionResult GetDoctors()
+        {
+            return Ok(_userService.GetDoctors());
+        }
+
+        [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]AuthenticationDto authenticationDto)
         {
