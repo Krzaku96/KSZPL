@@ -16,7 +16,7 @@ class CreatePacientContainer extends Component {
     dateOfBirth: "",
     dateOfRegister: "",
     doctors: [],
-    doctor: ""
+    doctor: 0
   };
 
   componentDidMount = () => {
@@ -25,6 +25,7 @@ class CreatePacientContainer extends Component {
         doctors: response.data
       });
     });
+    this.setState({ dateOfRegister: moment().format("YYYY-MM-DD") });
   };
 
   redirectToSuccessAdd = () => {
@@ -83,22 +84,53 @@ class CreatePacientContainer extends Component {
       }
     };
 
-    this.setState({ dateOfRegister: moment().format("YYYY-MM-DD") });
+    // const postData = {
+    //   name: this.state.firstName,
+    //   surname: this.state.lastName,
+    //   email: this.state.email,
+    //   address: this.state.address,
+    //   nip: this.state.nip,
+    //   dateBirth: this.state.dateOfBirth,
+    //   dateRegister: this.state.dateOfRegister,
+    //   pesel: this.state.pesel,
+    //   userId: this.state.doctor
+    // };
 
-    const postData = {
-      name: this.state.firstName,
-      surname: this.state.lastName,
-      email: this.state.email,
-      address: this.state.address,
-      nip: this.state.nip,
-      dateBirth: this.state.dateOfBirth,
-      dateRegister: this.state.dateOfRegister,
-      pesel: this.state.pesel,
-      doctor: this.state.doctor
-    };
+    // console.log(postData)
+
+    // axios
+    //   .post(BASE_URL + "Patient/registerpatient", postData, axiosConfig)
+    //   .then(response => {
+    //     if (response) {
+    //       this.redirectToSuccessAdd();
+    //     } else {
+    //       console.log("Can't find response");
+    //     }
+    //   });
 
     axios
-      .post(BASE_URL + "Patient/registerpatient", postData, axiosConfig)
+      .get(
+        BASE_URL +
+          "Patient/registerpatient/" +
+          this.state.address +
+          "/" +
+          this.state.dateOfBirth +
+          "/" +
+          this.state.dateOfRegister +
+          "/" +
+          this.state.email +
+          "/" +
+          this.state.nip +
+          "/" +
+          this.state.pesel +
+          "/" +
+          this.state.firstName +
+          "/" +
+          this.state.lastName +
+          "/" +
+          this.state.doctor,
+        axiosConfig
+      )
       .then(response => {
         if (response) {
           this.redirectToSuccessAdd();

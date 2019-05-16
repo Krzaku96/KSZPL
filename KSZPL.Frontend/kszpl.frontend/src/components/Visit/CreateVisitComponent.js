@@ -28,7 +28,7 @@ class CreateVisitComponent extends Component {
     }
 
 
-    componentDidMount(){
+    componentWillMount(){
         axios.get(BASE_URL + 'visit/createvisit')
        .then((response) => {
        this.setState({
@@ -39,8 +39,8 @@ class CreateVisitComponent extends Component {
     }
 
 
-    createOptionsPatients = () =>{  return this.state.patients.map(patients => (
-          <option value={patients.value} key={patients.value}>
+    createOptionsPatients = () =>{  return this.state.patients.map((patients, id) => (
+          <option value={patients.value} key={id}>
             {patients.label}
           </option>
         ))

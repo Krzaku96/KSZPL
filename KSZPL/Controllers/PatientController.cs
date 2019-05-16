@@ -22,7 +22,7 @@ namespace KSZPL.Api.Controllers
         private readonly IPatientService _patientService;
         private readonly IRepository<PatientCard> _repository;
         private readonly IPatientCardService _patientCardService;
-
+        
         public PatientController(KSZPLDbContext dbContext, IMapper mapper, IPatientService patientService, IPatientCardService patientCardService, IRepository<PatientCard> repository)
         {
             _dbContext = dbContext;
@@ -31,7 +31,7 @@ namespace KSZPL.Api.Controllers
             _patientCardService = patientCardService;
             _repository = repository;
         }
-
+        
         [AllowAnonymous]
         [HttpPost("registerpatient")]
         public IActionResult RegisterPatient([FromBody]AddPatientDto addPatientDto)
@@ -50,6 +50,38 @@ namespace KSZPL.Api.Controllers
             _patientService.Add(patient);
 
             var patientCard = new PatientCard {PatientId = patient.Id, UserId = addPatientDto.UserId};
+            _repository.Add(patientCard);
+
+            return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpGet("registerpatient/{address}/{dateBirth}/{dateRegister}/{email}/{nip}/{pesel}/{name}/{surname}/{userId}")]
+        public IActionResult RegisterPatientGet(
+            string address,
+            DateTime dateBirth, 
+            DateTime dateRegister,
+            string email,
+            int? nip,
+            int pesel,
+            string name,
+            string surname,
+            int userId)
+        {
+            var patient = new Patient
+            {
+                Address = address,
+                DateBirth = dateBirth,
+                DateRegister = dateRegister,
+                Email = email,
+                NIP = nip,
+                PESEL = pesel,
+                Name = name,
+                Surname = surname
+            };
+            _patientService.Add(patient);
+
+            var patientCard = new PatientCard { PatientId = patient.Id, UserId = userId };
             _repository.Add(patientCard);
 
             return Ok();

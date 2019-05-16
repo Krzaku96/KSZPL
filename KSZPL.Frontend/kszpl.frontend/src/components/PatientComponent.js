@@ -36,7 +36,8 @@ class PatientComponent extends Component {
       .delete(BASE_URL + "Patient/" + this.props.id, axiosConfig)
       .then(response => {
         if (response) {
-          console.log("deleted")
+          
+          console.log("deleted");
         } else {
           console.log("Can't find response");
         }
