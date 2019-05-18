@@ -6,24 +6,24 @@ class EditPacientComponent extends Component {
     return (
       <Card>
         <Card.Header>
-          <Card.Title>Edit patient</Card.Title>
+          <Card.Title>Edytuj pacjenta</Card.Title>
         </Card.Header>
         <Card.Body>
           <Form onSubmit={this.props.editPatientOnClick}>
             <Form.Group>
-              <Form.Label>First name</Form.Label>
+              <Form.Label>Imię</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="First name"
+                placeholder="Imię"
                 value={this.props.firstName}
                 onChange={this.props.handleFirstNameChange}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Last name</Form.Label>
+              <Form.Label>Nazwisko</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Last name"
+                placeholder="Nazwisko"
                 value={this.props.lastName}
                 onChange={this.props.handleLastNameChange}
               />
@@ -38,10 +38,10 @@ class EditPacientComponent extends Component {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Address</Form.Label>
+              <Form.Label>Adres</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Address"
+                placeholder="Adres"
                 value={this.props.address}
                 onChange={this.props.handleAddressChange}
               />
@@ -65,15 +65,15 @@ class EditPacientComponent extends Component {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Date of birth</Form.Label>
+              <Form.Label>Data urodzin</Form.Label>
               <Form.Control
                 type="date"
-                placeholder="Date of birth"
+                placeholder="Data urodzin"
                 value={this.props.dateBirth}
                 onChange={this.props.handleDateOfBirthChange}
               />
             </Form.Group>
-            <Button type="submit">Edit</Button>
+            <Button type="submit">Edytuj</Button>
           </Form>
         </Card.Body>
       </Card>

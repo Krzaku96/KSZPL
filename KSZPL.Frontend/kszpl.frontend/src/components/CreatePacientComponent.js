@@ -6,23 +6,23 @@ class CreatePacientComponent extends Component {
     return (
       <Card>
         <Card.Header>
-          <Card.Title>Add patient</Card.Title>
+          <Card.Title>Dodaj pacjenta</Card.Title>
         </Card.Header>
         <Card.Body>
           <Form onSubmit={this.props.addPatientOnClick}>
             <Form.Group>
-              <Form.Label>First name</Form.Label>
+              <Form.Label>Imię</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="First name"
+                placeholder="Imię"
                 onChange={this.props.handleFirstNameChange}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Last name</Form.Label>
+              <Form.Label>Nazwisko</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Last name"
+                placeholder="Nazwisko"
                 onChange={this.props.handleLastNameChange}
               />
             </Form.Group>
@@ -35,10 +35,10 @@ class CreatePacientComponent extends Component {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Address</Form.Label>
+              <Form.Label>Adres</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Address"
+                placeholder="Adres"
                 onChange={this.props.handleAddressChange}
               />
             </Form.Group>
@@ -59,24 +59,24 @@ class CreatePacientComponent extends Component {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Date of birth</Form.Label>
+              <Form.Label>Data urodzin</Form.Label>
               <Form.Control
                 type="date"
-                placeholder="Date of birth"
+                placeholder="Data urodzin"
                 onChange={this.props.handleDateOfBirthChange}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Doctor</Form.Label>
+              <Form.Label>Doktor</Form.Label>
               <Form.Control
                 as="select"
-                placeholder="Doctor"
+                placeholder="Doktor"
                 onChange={this.props.handleDoctorChange}
               >
                 {this.props.createOptionsDoctors()}
               </Form.Control>
             </Form.Group>
-            <Button type="submit">Add</Button>
+            <Button type="submit">Dodaj</Button>
           </Form>
         </Card.Body>
       </Card>

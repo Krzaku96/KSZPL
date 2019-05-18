@@ -54,10 +54,10 @@ class PatientComponent extends Component {
         <td>{this.props.pesel}</td>
         <td>
           <Button variant="primary" onClick={this.redirectToUpdatePatient}>
-            Update
+            Edytuj
           </Button>
           <Button variant="danger" onClick={this.deletePatient}>
-            Delete
+            Usuń
           </Button>
         </td>
       </tr>

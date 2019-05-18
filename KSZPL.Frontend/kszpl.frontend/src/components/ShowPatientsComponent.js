@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PatientComponent from "./PatientComponent";
 import { Table } from "react-bootstrap";
+import moment from 'moment';
 
 class ShowPatientsComponent extends Component {
   mapPatientsToShow = () => {
@@ -11,7 +12,7 @@ class ShowPatientsComponent extends Component {
         id={patient.id}
         firstName={patient.name}
         lastName={patient.surname}
-        dateBirth={patient.dateBirth}
+        dateBirth= {this.parseDate(patient.dateBirth)}
         pesel={patient.pesel}
         address={patient.address}
         nip={patient.nip}
@@ -21,6 +22,14 @@ class ShowPatientsComponent extends Component {
     ));
   };
 
+
+  parseDate(date)
+  {
+      return (
+          moment(date).format("DD-MM-YYYY")
+      )
+  }
+
   render() {
     return (
       <div>
@@ -28,11 +37,11 @@ class ShowPatientsComponent extends Component {
           <thead>
             <tr>
               <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Date of birth</th>
+              <th>Imię</th>
+              <th>Nazwisko</th>
+              <th>Data urodzin</th>
               <th>Pesel</th>
-              <th>Actions</th>
+              <th>Akcje</th>
             </tr>
           </thead>
           <tbody>{this.mapPatientsToShow()}</tbody>

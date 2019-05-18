@@ -6,51 +6,51 @@ class CreateUserComponent extends Component {
     return (
       <Card>
         <Card.Header>
-          <Card.Title>Add user</Card.Title>
+          <Card.Title>Dodaj użytkownika</Card.Title>
         </Card.Header>
         <Card.Body>
           <Form onSubmit={this.props.addUserOnClick}>
             <Form.Group>
-              <Form.Label>First name</Form.Label>
+              <Form.Label>Imię</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="First name"
+                placeholder="Imię"
                 onChange={this.props.handleFirstNameChange}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Last name</Form.Label>
+              <Form.Label>Nazwisko</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Last name"
+                placeholder="Nazwisko"
                 onChange={this.props.handleLastNameChange}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Username</Form.Label>
+              <Form.Label>Login</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Username"
+                placeholder="Login"
                 onChange={this.props.handleUsernameChange}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Hasło</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Password"
+                placeholder="Hasło"
                 onChange={this.props.handlePasswordChange}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Role</Form.Label>
+              <Form.Label>Rola</Form.Label>
               <Form.Control as="select" onChange={this.props.handleRoleChange}>
-                <option>Receptionist</option>
-                <option>Doctor</option>
+                <option>Recepcjonista</option>
+                <option>Doktor</option>
                 <option>Admin</option>
               </Form.Control>
             </Form.Group>
-            <Button type="submit">Add</Button>
+            <Button type="submit">Dodaj</Button>
           </Form>
         </Card.Body>
       </Card>

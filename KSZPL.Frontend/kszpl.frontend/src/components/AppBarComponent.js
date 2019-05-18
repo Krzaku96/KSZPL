@@ -15,28 +15,28 @@ class AppBarComponent extends Component {
               className="color-white"
               onClick={this.props.redirectToHome}
             >
-              Home
+              Strona głowna
             </Nav.Link>
-            <NavDropdown className="color-white" title="Your account">
+            <NavDropdown className="color-white" title="Twoje konto">
               <NavDropdown.Item onClick={this.props.redirectToDetails}>
-                Details
+                Informacje
               </NavDropdown.Item>
               {this.props.role === "Admin" ? (
                 <div>
                   <NavDropdown.Item onClick={this.props.redirectToAddUser}>
-                    Add user
+                    Dodaj użytkownika
                   </NavDropdown.Item>
                   <NavDropdown.Item onClick={this.props.showUsersOnClick}>
-                    Show users
+                    Wyświetl informacje o użytkowniku
                   </NavDropdown.Item>
                 </div>
               ) : null}
               <NavDropdown.Item onClick={this.props.redirectToUpdateUser}>
-                Change password
+                Zmień hasło
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={this.props.logout}>
-                Logout
+                Wyloguj się
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Wizyty">
