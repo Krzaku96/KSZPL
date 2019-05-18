@@ -50,6 +50,16 @@ class ShowRecipeComponent extends Component{
         window.location = '/recipe/update/'+ id;
     }
 
+    onClickGeneratePdf = () => {
+        axios.get( BASE_URL + `/recipe/generaterecipepdf/${this.props.match.params.id}`)
+            .then(()=>{
+                window.confirm('Wygenerowana została recepta w formacie PDF!');
+            })
+            .catch((err)=>{
+                
+            });
+    }
+
     render(){
 
         return(
@@ -76,7 +86,7 @@ class ShowRecipeComponent extends Component{
                     
                         <Col sm={3}> <Button onClick={() => this.OnClickReturn()} className="btn btn-light">Wroc</Button> </Col>
                         <Col sm={3}> <Button onClick={() => this.OnClickEdit(this.state.id)} className="btn btn-primary">Edytuj</Button> </Col>
-                        <Col sm={6}> <Button className="btn btn-primary">Generuj pdf</Button> </Col>
+                        <Col sm={6}> <Button onClick={() => this.onClickGeneratePdf(this.state.id)} className="btn btn-primary">Generuj pdf</Button> </Col>
                         </Row>
                     </Form>
                 </Row>

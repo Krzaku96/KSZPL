@@ -10,5 +10,6 @@ namespace KSZPL.Core.Interfaces
         RegisterRecipeDto CreateModelToRegisterRecipe(int idVisit);
         ShowRecipeDto ShowRecipe(int idVisit);
         ShowToEditRecipeDto CreateModelToEditShowRecipe(int idRecipe);
+        void GenerateRecipePdf(int idVisit);
     }
 }
