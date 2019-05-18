@@ -6,19 +6,19 @@ class UpdateUserComponent extends Component {
     return (
       <Card>
         <Card.Header>
-          <Card.Title>Change password</Card.Title>
+          <Card.Title>Zmień hasło</Card.Title>
         </Card.Header>
         <Card.Body>
           <Form onSubmit={this.props.updateUserOnClick}>
             <Form.Group>
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Hasło</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Password"
+                placeholder="Hasło"
                 onChange={this.props.handlePasswordChange}
               />
             </Form.Group>
-            <Button type="submit">Change password</Button>
+            <Button type="submit">Zmień hasło</Button>
           </Form>
         </Card.Body>
       </Card>

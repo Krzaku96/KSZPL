@@ -7,23 +7,23 @@ class DetailsComponent extends Component {
     return (
       <Card>
         <Card.Header>
-          <Card.Title>Details of your account</Card.Title>
+          <Card.Title>Informacje o Twoim koncie</Card.Title>
         </Card.Header>
         <Card.Body>
           <Row>
-            <Card.Text className="bold">Username: </Card.Text>
+            <Card.Text className="bold">Login: </Card.Text>
             {JSON.parse(localStorage.getItem("username"))}
           </Row>
           <Row>
-            <Card.Text className="bold">First name: </Card.Text>
+            <Card.Text className="bold">Imię: </Card.Text>
             {JSON.parse(localStorage.getItem("firstName"))}
           </Row>
           <Row>
-            <Card.Text className="bold">Last name: </Card.Text>
+            <Card.Text className="bold">Nazwisko: </Card.Text>
             {JSON.parse(localStorage.getItem("lastName"))}
           </Row>
           <Row>
-            <Card.Text className="bold">Role: </Card.Text>
+            <Card.Text className="bold">Rola: </Card.Text>
             {JSON.parse(localStorage.getItem("role"))}
           </Row>
         </Card.Body>

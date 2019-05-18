@@ -7,19 +7,19 @@ class LoginComponent extends Component {
     return (
       <Card className="card">
         <Card.Header>
-          <Card.Title>Log in to your account</Card.Title>
+          <Card.Title>Zaloguj się na swoje konto</Card.Title>
         </Card.Header>
         <Card.Body>
           <Form onSubmit={this.props.handleLoginSubmit}>
             <Form.Group name="username">
-              <Form.Label>Username</Form.Label>
+              <Form.Label>Login</Form.Label>
               <Form.Control onChange={this.props.handleUsernameChange} type="text" placeholder="Enter username" />
             </Form.Group>
             <Form.Group name="password">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Hasło</Form.Label>
               <Form.Control onChange={this.props.handlePasswordChange} type="password" placeholder="Enter password" />
             </Form.Group>
-            <Button type="submit">Login</Button>
+            <Button type="submit">Zaloguj się</Button>
           </Form>
         </Card.Body>
       </Card>

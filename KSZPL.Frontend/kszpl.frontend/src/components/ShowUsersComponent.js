@@ -23,11 +23,11 @@ class ShowUsersComponent extends Component {
           <thead>
             <tr>
               <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Username</th>
-              <th>Role</th>
-              <th>Actions</th>
+              <th>Imię</th>
+              <th>Nazwisko</th>
+              <th>Login</th>
+              <th>Rola</th>
+              <th>Akcje</th>
             </tr>
           </thead>
           <tbody>{this.mapUsersToShow()}</tbody>
