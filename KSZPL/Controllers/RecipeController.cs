@@ -113,10 +113,19 @@ namespace KSZPL.Api.Controllers
                 return BadRequest();
             }
 
-            //var recipe = _repository.GetById(id);
-            //var recipeDto = _mapper.Map<RecipeDto>(recipe);
-            //return Ok(recipeDto);
             return Ok(_recipeService.ShowRecipe(visitId));
+        }
+
+        [HttpGet("generaterecipepdf/{id}")]
+        public IActionResult GenerateRecipePdf(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            _recipeService.GenerateRecipePdf(id);
+            return Ok();
         }
 
     }
