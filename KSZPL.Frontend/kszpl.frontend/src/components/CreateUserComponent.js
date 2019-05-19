@@ -45,6 +45,7 @@ class CreateUserComponent extends Component {
             <Form.Group>
               <Form.Label>Rola</Form.Label>
               <Form.Control as="select" onChange={this.props.handleRoleChange}>
+                <option value=''></option>
                 <option>Recepcjonista</option>
                 <option>Doktor</option>
                 <option>Admin</option>

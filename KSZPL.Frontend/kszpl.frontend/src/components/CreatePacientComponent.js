@@ -73,6 +73,7 @@ class CreatePacientComponent extends Component {
                 placeholder="Doktor"
                 onChange={this.props.handleDoctorChange}
               >
+              <option value=''></option>
                 {this.props.createOptionsDoctors()}
               </Form.Control>
             </Form.Group>

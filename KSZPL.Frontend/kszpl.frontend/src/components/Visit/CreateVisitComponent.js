@@ -124,6 +124,7 @@ class CreateVisitComponent extends Component {
                         <Col sm={12}> <Form.Label> Imię i nazwisko pacjenta: </Form.Label> </Col>
                         <Col sm={12}>
                             <FormControl as="select" value={this.state.patientCardId}  onChange={this.onChangePatientCardId} >
+                            <option value=''></option>
                             {this.createOptionsPatients()}
                             </FormControl>
                         </Col>
@@ -144,6 +145,7 @@ class CreateVisitComponent extends Component {
                         <Col sm={12}> <Form.Label> Imię i nazwisko lekarza: </Form.Label> </Col>
                         <Col sm={12}>
                             <FormControl as="select" value={this.state.userId} onChange={this.onChangeDoctorId} >
+                            <option value=''></option>
                             {this.createOptionsDoctors()}
                             </FormControl>
                         </Col>

@@ -11,8 +11,8 @@ class UserComponent extends Component {
         <td>{this.props.username}</td>
         <td>{this.props.role}</td>
         <td>
-          <Button variant="primary">Update</Button>
-          <Button variant="danger">Delete</Button>
+          <Button variant="primary">Edytuj</Button>
+          <Button variant="danger">Usuń</Button>
         </td>
       </tr>
     );

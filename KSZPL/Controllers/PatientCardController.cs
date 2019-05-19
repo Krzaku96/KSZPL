@@ -81,9 +81,6 @@ namespace KSZPL.Api.Controllers
                 return BadRequest();
             }
 
-            //var patientCards = _repository.GetAll();
-            //var patientCardDtos = _mapper.Map<IList<PatientCardDto>>(patientCards);
-
             return Ok(_patientCardService.CreateModelToListAllPatientCards());
         }
 
@@ -99,6 +96,18 @@ namespace KSZPL.Api.Controllers
             var patientCard = _repository.GetById(id);
             var patientCardDto = _mapper.Map<PatientCardDto>(patientCard);
             return Ok(patientCardDto);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("gethistory/{id}")]
+        public IActionResult GetHistory(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return Ok(_patientCardService.GetHistoryOfTreatmentPatient(id));
         }
     }
 }
