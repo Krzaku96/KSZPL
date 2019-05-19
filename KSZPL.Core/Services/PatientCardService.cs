@@ -86,5 +86,18 @@ namespace KSZPL.Core.Services
 
             return listPatientCards;
         }
+
+        public List<VisitDto> GetHistoryOfTreatmentPatient(int idPatientCard)
+        {
+            var allVisits = _repositoryVisit.GetAll();
+            var visitsDto = _mapper.Map<IList<VisitDto>>(allVisits);
+
+            var visitsPatient = (from v in visitsDto
+                                 where v.PatientCardId == idPatientCard
+                                 select v).ToList();
+
+            return visitsPatient;
+
+        }
     }
 }
