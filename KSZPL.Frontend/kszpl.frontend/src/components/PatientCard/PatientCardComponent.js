@@ -15,6 +15,11 @@ class PatientCardComponent extends Component{
                 })
             }
 
+    morePatientCard = () => {
+        window.location = '/patientcard/showhistory/' + this.props.id;
+    }
+
+
     parseDate(date)
     {
         return (
@@ -31,7 +36,7 @@ class PatientCardComponent extends Component{
             <td>{this.parseDate(this.props.dateLastVisit)}</td>
             <td>{this.parseDate(this.props.dateRegister)}</td>
             <td>
-            <Button variant="primary">Więcej</Button>
+            <Button variant="primary" onClick={() => this.morePatientCard()}>Więcej</Button>
             <Button variant="danger" onClick={() => this.deletePatientCard()}>Usuń</Button>
             </td>
         </tr>
