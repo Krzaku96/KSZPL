@@ -15,7 +15,7 @@ class CreateRecipeComponent extends Component{
         this.state = {
             patientName: '',
             doctorName: '',
-            patientCardId: 0, 
+            patientCardId: 0,
             userId: 0,
             dateRelease: new Date(),
             prescribedMedicines: '',

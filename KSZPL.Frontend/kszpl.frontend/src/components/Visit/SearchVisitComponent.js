@@ -18,8 +18,10 @@ class SearchVisitComponent extends Component{
             patients: [],
             doctors: [],
             dateVisit: new Date(),
-            patientId: 1,
-            doctorId: 1
+            patientId: 0,
+            doctorId: 0,
+            nullPatient: 0,
+            nullDoctor: 0
         }
 
     } 
@@ -91,7 +93,7 @@ class SearchVisitComponent extends Component{
   
 
   findVisit = () => {
-
+        debugger;
         axios.get( BASE_URL + `visit/find/${this.state.patientId}/${this.state.doctorId}/${this.parseDate(this.state.dateVisit)}`)
         .then(response => {
             debugger;
@@ -101,9 +103,8 @@ class SearchVisitComponent extends Component{
             }
             else
             {
-                this.setState({ visits: response.data });
-                this.mapVisitsToShow();
                 window.confirm('Nie znaleziono wizyty spełniającej kryteria!');
+                window.location = '/searchvisit/'
             }
     }); 
   }
@@ -125,10 +126,16 @@ class SearchVisitComponent extends Component{
                 <Row>
                 <Col sm={2}> </Col>
                     <Col sm={4}>
-                        <FormControl as="select" value={this.state.doctorId}  onChange={this.onChangeDoctorId}>{this.createOptionsDoctors()}</FormControl>
+                        <FormControl as="select" value={this.state.doctorId}  onChange={this.onChangeDoctorId}>
+                            <option value='' key={this.state.nullDoctor}></option>
+                            {this.createOptionsDoctors()}
+                        </FormControl>
                     </Col>
                     <Col sm={4}>
-                        <FormControl as="select" value={this.state.patientId}  onChange={this.onChangePatientId}>{this.createOptionsPatients()}</FormControl>
+                        <FormControl as="select" value={this.state.patientId}  onChange={this.onChangePatientId}>
+                            <option value='' key={this.state.nullPatient}></option>
+                            {this.createOptionsPatients()}
+                        </FormControl>
                     </Col>
                     <Col sm={2}> </Col>
               </Row>

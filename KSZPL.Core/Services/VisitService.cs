@@ -277,9 +277,44 @@ namespace KSZPL.Core.Services
             DateTime dateVisit = DateTime.Parse(dateVisitString);
 
             listVisits.OrderByDescending(d => d.DateVisit);
-            var filteredList = (listVisits.Where(x => x.UserId == idDoctor).DefaultIfEmpty()
-                .Where(x => x.PatientCardId == GetPatientCardId(idPatient)).DefaultIfEmpty()
-                .Where(x => x!= null &&  x.DateVisit.Date == dateVisit).DefaultIfEmpty()).ToList();
+
+            var filteredList = new List<ShowVisitDto>();
+
+
+            if(idDoctor == 0)
+            {
+                if (idPatient != 0)
+                {
+                    filteredList = (listVisits.Where(x => x.PatientCardId == GetPatientCardId(idPatient)).DefaultIfEmpty()
+                   .Where(x => x != null && x.DateVisit.Date == dateVisit).DefaultIfEmpty()).ToList();
+                }
+                else
+                {
+                    filteredList = listVisits.Where(x => x != null && x.DateVisit.Date == dateVisit).DefaultIfEmpty().ToList();
+                }
+            }
+            if (idPatient == 0)
+            {
+                if (idDoctor != 0)
+                {
+                    filteredList = (listVisits.Where(x => x.UserId == idDoctor).DefaultIfEmpty()
+                    .Where(x => x != null && x.DateVisit.Date == dateVisit).DefaultIfEmpty()).ToList();
+                }
+                else
+                {
+                    filteredList = listVisits.Where(x => x != null && x.DateVisit.Date == dateVisit).DefaultIfEmpty().ToList();
+                }
+            }
+            if(idDoctor != 0 && idPatient != 0)
+            {
+                if (GetPatientCardId(idPatient) != 0)
+                {
+                    filteredList = (listVisits.Where(x => x.UserId == idDoctor).DefaultIfEmpty()
+                   .Where(x => x.PatientCardId == GetPatientCardId(idPatient)).DefaultIfEmpty()
+                   .Where(x => x != null && x.DateVisit.Date == dateVisit).DefaultIfEmpty()).ToList();
+                }
+            }
+
 
             return filteredList;
         }
