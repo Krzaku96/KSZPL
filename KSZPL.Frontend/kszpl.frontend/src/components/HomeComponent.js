@@ -6,8 +6,7 @@ import { Table } from "react-bootstrap";
 
 class HomeComponent extends Component {
   state = {
-    visits: [],
-    role: ''
+    visits: []
   };
 
   componentDidMount = () => {
@@ -36,26 +35,10 @@ class HomeComponent extends Component {
     ));
   };
 
-  getRole = () => {
-    if(this.props.role === "Doctor")
-    {
-      this.state.role = "doktor"
-    }
-    else if(this.props.role === "Admin")
-    {
-      this.state.role = "admin"
-    }
-    else if(this.props.role === "Receptionist")
-    {
-      this.state.role = "recepcjonista"
-    }
-    return this.state.role;
-  }
-
   render() {
     return (
       <div>
-        Jesteś zalogowany jako {this.getRole()}
+        Jesteś zalogowany jako {this.props.role}
         <Table striped bordered hover>
           <thead>
             <tr>

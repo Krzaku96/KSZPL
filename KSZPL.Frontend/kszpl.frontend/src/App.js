@@ -7,12 +7,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import LoginContainer from "./containers/LoginContainer";
 
 class App extends Component {
+  componentDidMount() {
+    document.title = "KSZPL";
+  }
+
   render() {
     return (
       <Router>
         <div className="App">
           <div className="Header">
-            <AppBarContainer  />
+            <AppBarContainer />
           </div>
           <div className="Body">
             {localStorage.getItem("token") ? <Routes /> : <LoginContainer />}

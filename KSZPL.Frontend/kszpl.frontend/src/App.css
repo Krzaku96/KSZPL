@@ -4,6 +4,7 @@
   min-height: 100vh;
   overflow: hidden;
   padding-bottom: 50px;
+  background-color: beige;
 }
 
 .Footer {
@@ -12,7 +13,7 @@
   bottom: 0;
   width: 100%;
   color: #fff;
-  background-color: #3f51b5;
+  background-color: #343a40;
 }
 
 .Body {
@@ -20,6 +21,6 @@
 }
 
 .Header {
-  background-color: #3f51b5;
+  background-color: #343a40;
   color: #fff;
 }
