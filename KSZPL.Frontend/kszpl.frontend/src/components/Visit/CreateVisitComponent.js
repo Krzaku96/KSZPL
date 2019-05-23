@@ -85,7 +85,7 @@ class CreateVisitComponent extends Component {
             Accept: "application/json"
             }
         };
-            axios.post(BASE_URL + '/visit/createvisit', {dateVisit: this.state.dateVisit, description: this.state.description, id: 0, place: this.state.place, status: this.state.status, userId: this.state.userId, patientCardId: this.state.patientCardId },axiosConfig)
+            axios.post(BASE_URL + 'visit/createvisit', {dateVisit: this.state.dateVisit, description: this.state.description, id: 0, place: this.state.place, status: this.state.status, userId: this.state.userId, patientCardId: this.state.patientCardId },axiosConfig)
             .then(()=>{
                 window.confirm('Wizyta została dodana!');
             })
