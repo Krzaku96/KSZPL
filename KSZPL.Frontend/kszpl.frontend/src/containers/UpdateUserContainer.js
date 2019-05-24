@@ -25,7 +25,8 @@ class UpdateUserContainer extends Component {
     let axiosConfig = {
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json"
+        Accept: "application/json",
+        Authorization: "bearer " + JSON.parse(localStorage.getItem("token"))
       }
     };
 

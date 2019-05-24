@@ -39,6 +39,7 @@ namespace KSZPL.Api
             
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            var signingKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(key);
             services.AddAuthentication(x =>
                 {
                     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -65,10 +66,10 @@ namespace KSZPL.Api
                     x.SaveToken = true;
                     x.TokenValidationParameters = new TokenValidationParameters
                     {
+                        IssuerSigningKey = signingKey,
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(key),
-                        ValidateIssuer = false,
-                        ValidateAudience = false
+                        ValidateAudience = false,
+                        ValidateIssuer = false
                     };
                 });
 
@@ -98,6 +99,7 @@ namespace KSZPL.Api
             app.UseSwagger();
             app.UseSwaggerUI(
                 options => { options.SwaggerEndpoint("/swagger/KSZPL-Core/swagger.json", "KSZPL Server"); });
+            app.UseAuthentication();
             app.UseMvc();
         }
     }
