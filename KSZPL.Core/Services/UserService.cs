@@ -58,6 +58,7 @@ namespace KSZPL.Core.Services
             
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var signingKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(key);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
@@ -66,11 +67,14 @@ namespace KSZPL.Core.Services
                     new Claim(ClaimTypes.Role, user.Role)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
             user.Token = tokenString;
+            
+            _context.Users.Update(user);
+            _context.SaveChanges();
 
             return user;
         }
@@ -104,7 +108,7 @@ namespace KSZPL.Core.Services
 
             _context.Users.Add(user);
             _context.SaveChanges();
-
+            
             return user;
         }
 

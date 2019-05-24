@@ -99,10 +99,11 @@ class AppBarContainer extends Component {
     let axiosConfig = {
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json"
+        Accept: "application/json",
+        Authorization: "bearer " + JSON.parse(localStorage.getItem("token"))
       }
     };
-
+    console.log(axiosConfig)
     axios.get(BASE_URL + "Users", axiosConfig).then(response => {
       if (response.data) {
         this.setState({ users: response.data });

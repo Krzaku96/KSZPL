@@ -50,8 +50,8 @@ namespace KSZPL.Api.Controllers
 
             return Ok(user);
         }
-
-        [AllowAnonymous]
+        
+        [Authorize(Roles = Role.Admin)]
         [HttpPost("register")]
         public IActionResult Register([FromBody]UserDto userDto)
         {
@@ -61,8 +61,8 @@ namespace KSZPL.Api.Controllers
 
             return Ok();        
         }
-        
-        [AllowAnonymous]
+
+        [Authorize(Roles = Role.Admin)]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -71,7 +71,7 @@ namespace KSZPL.Api.Controllers
             return Ok(userDtos);
         }
         
-        [AllowAnonymous]
+        [Authorize(Roles = Role.Admin)]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -86,7 +86,7 @@ namespace KSZPL.Api.Controllers
             return Ok(userDto);
         }
         
-        [AllowAnonymous]
+        [Authorize]
         [HttpPut]
         public IActionResult Update([FromBody]UserDto userDto)
         {
