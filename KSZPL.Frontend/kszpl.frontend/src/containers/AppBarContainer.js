@@ -9,7 +9,8 @@ class AppBarContainer extends Component {
     username: "",
     role: "",
     users: [],
-    patients: []
+    patients: [],
+    errorCode: 0
   };
 
   componentWillMount = () => {
@@ -19,6 +20,15 @@ class AppBarContainer extends Component {
   redirectToHome = () => {
     return this.props.history.push({
       pathname: "/"
+    });
+  };
+
+  handleError = () => {
+    return this.props.history.push({
+      pathname: "/error",
+      state: {
+        errorCode: this.state.errorCode
+      }
     });
   };
 
@@ -44,14 +54,14 @@ class AppBarContainer extends Component {
         patients: this.state.patients
       }
     });
-  }
+  };
 
   redirectToAddUser = () => {
     return this.props.history.push({
       pathname: "/createUser"
     });
   };
-  
+
   redirectToUpdateUser = () => {
     return this.props.history.push({
       pathname: "/changePassword"
@@ -64,12 +74,12 @@ class AppBarContainer extends Component {
     });
   };
 
-  redirectToCreateVisit= () => {
+  redirectToCreateVisit = () => {
     return this.props.history.push({
       pathname: "/visit/createvisit"
     });
   };
-  
+
   redirectToAddPatient = () => {
     return this.props.history.push({
       pathname: "/createPatient"
@@ -85,9 +95,9 @@ class AppBarContainer extends Component {
   redirectToListPatientCards = () => {
     return this.props.history.push({
       pathname: "/listpatientcards"
-    })
-  }
-  
+    });
+  };
+
   checkRole = () => {
     var role = JSON.parse(localStorage.getItem("role"));
     this.setState({ role: role });
@@ -103,16 +113,22 @@ class AppBarContainer extends Component {
         Authorization: "bearer " + JSON.parse(localStorage.getItem("token"))
       }
     };
-    console.log(axiosConfig)
-    axios.get(BASE_URL + "Users", axiosConfig).then(response => {
-      if (response.data) {
-        this.setState({ users: response.data });
-        this.redirectToShowUsers();
-        console.log(response);
-      } else {
-        console.log("Can't find response");
-      }
-    });
+
+    axios
+      .get(BASE_URL + "Users", axiosConfig)
+      .then(response => {
+        if (response.data) {
+          this.setState({ users: response.data });
+          this.redirectToShowUsers();
+          console.log(response);
+        } else {
+          console.log("Can't find response");
+        }
+      })
+      .catch(error => {
+        this.setState({ errorCode: error.response.status });
+        this.handleError();
+      });
   };
 
   showPatients = event => {
@@ -125,16 +141,22 @@ class AppBarContainer extends Component {
       }
     };
 
-    axios.get(BASE_URL + "Patient", axiosConfig).then(response => {
-      if (response.data) {
-        this.setState({ patients: response.data });
-        console.log(response);
-        this.redirectToShowPatients();
-      } else {
-        console.log("Can't find response");
-      }
-    });
-  }
+    axios
+      .get(BASE_URL + "Patient", axiosConfig)
+      .then(response => {
+        if (response.data) {
+          this.setState({ patients: response.data });
+          console.log(response);
+          this.redirectToShowPatients();
+        } else {
+          console.log("Can't find response");
+        }
+      })
+      .catch(error => {
+        this.setState({ errorCode: error.response.status });
+        this.handleError();
+      });
+  };
 
   logout = () => {
     localStorage.clear();

@@ -17,9 +17,9 @@ class EditPatientContainer extends Component {
     dateRegister: this.props.location.state.dateOfRegister
   };
 
-  redirectToSuccessAdd = () => {
+  redirectToHome = () => {
     return this.props.history.push({
-      pathname: "/successAddUser"
+      pathname: "/"
     });
   };
 
@@ -74,7 +74,8 @@ class EditPatientContainer extends Component {
 
     axios.put(BASE_URL + "Patient", postData, axiosConfig).then(response => {
       if (response) {
-        this.redirectToSuccessAdd();
+        window.confirm('Pacjent został zedytowany!');
+        this.redirectToHome();
       } else {
         console.log("Can't find response");
       }
