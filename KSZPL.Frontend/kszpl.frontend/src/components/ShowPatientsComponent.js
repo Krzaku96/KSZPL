@@ -33,7 +33,7 @@ class ShowPatientsComponent extends Component {
   render() {
     return (
       <div>
-        <Table striped bordered hover variant-dark>
+        <Table striped bordered hover >
           <thead className="color-khaki color-black">  
             <tr>
               <th>#</th>

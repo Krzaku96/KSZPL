@@ -16,6 +16,7 @@ class UpdateUserComponent extends Component {
                 type="password"
                 placeholder="Hasło"
                 onChange={this.props.handlePasswordChange}
+                required
               />
             </Form.Group>
             <Button type="submit">Zmień hasło</Button>

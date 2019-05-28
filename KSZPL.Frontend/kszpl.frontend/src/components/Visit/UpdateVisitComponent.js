@@ -158,6 +158,7 @@ class UpdateVisitComponent extends Component {
                     onChange={this.onChangeDescription}
                     defaultValue={this.state.description}
                     placeholder="Opis wizyty"
+                    required
                   />
                 </Col>
               </Row>
@@ -171,6 +172,7 @@ class UpdateVisitComponent extends Component {
                     as="select"
                     value={this.state.patientId}
                     onChange={this.onChangePatientId}
+                    required
                   >
                     {this.createOptionsPatients()}
                   </FormControl>
@@ -186,6 +188,7 @@ class UpdateVisitComponent extends Component {
                     onChange={this.onChangePlace}
                     defaultValue={this.state.place}
                     placeholder="Miejsce wizyty"
+                    required
                   />
                 </Col>
               </Row>
@@ -199,6 +202,7 @@ class UpdateVisitComponent extends Component {
                     onChange={this.onChangeStatus}
                     defaultValue={this.state.status}
                     placeholder="Status wizyty"
+                    required
                   />
                 </Col>
               </Row>
@@ -212,6 +216,7 @@ class UpdateVisitComponent extends Component {
                     as="select"
                     onChange={this.onChangeDoctorId}
                     value={this.state.userId}
+                    required
                   >
                     {this.createOptionsDoctors()}
                   </FormControl>

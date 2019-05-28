@@ -140,10 +140,11 @@ class CreateVisitComponent extends Component {
                   {" "}
                   <Form.Label> Opis: </Form.Label>{" "}
                 </Col>
-                <Col sm={11}>
+                <Col sm={12}>
                   <FormControl
                     onChange={this.onChangeDescription}
                     placeholder="Opis wizyty"
+                    required
                   />
                 </Col>
               </Row>
@@ -157,6 +158,7 @@ class CreateVisitComponent extends Component {
                     as="select"
                     value={this.state.patientCardId}
                     onChange={this.onChangePatientCardId}
+                    required
                   >
                     <option value="" />
                     {this.createOptionsPatients()}
@@ -172,6 +174,7 @@ class CreateVisitComponent extends Component {
                   <FormControl
                     onChange={this.onChangePlace}
                     placeholder="Miejsce wizyty"
+                    required
                   />
                 </Col>
               </Row>
@@ -184,6 +187,7 @@ class CreateVisitComponent extends Component {
                   <FormControl
                     onChange={this.onChangeStatus}
                     placeholder="Status wizyty"
+                    required
                   />
                 </Col>
               </Row>
@@ -197,6 +201,7 @@ class CreateVisitComponent extends Component {
                     as="select"
                     value={this.state.userId}
                     onChange={this.onChangeDoctorId}
+                    required
                   >
                     <option value="" />
                     {this.createOptionsDoctors()}

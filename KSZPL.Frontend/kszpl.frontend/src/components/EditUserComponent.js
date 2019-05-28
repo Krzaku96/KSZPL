@@ -17,6 +17,7 @@ class EditUserComponent extends Component {
                 placeholder="Imię"
                 value={this.props.firstName}
                 onChange={this.props.handleFirstNameChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -26,6 +27,7 @@ class EditUserComponent extends Component {
                 placeholder="Nazwisko"
                 value={this.props.lastName}
                 onChange={this.props.handleLastNameChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -35,11 +37,16 @@ class EditUserComponent extends Component {
                 placeholder="Username"
                 disabled
                 value={this.props.username}
+                required
               />
             </Form.Group>
             <Form.Group>
               <Form.Label>Rola</Form.Label>
-              <Form.Control as="select" onChange={this.props.handleRoleChange}>
+              <Form.Control
+                as="select"
+                onChange={this.props.handleRoleChange}
+                required
+              >
                 <option value="" />
                 <option>Recepcjonista</option>
                 <option>Doktor</option>
@@ -52,6 +59,7 @@ class EditUserComponent extends Component {
                 type="password"
                 placeholder="Hasło"
                 onChange={this.props.handlePasswordChange}
+                required
               />
             </Form.Group>
             <Button type="submit">Edytuj</Button>

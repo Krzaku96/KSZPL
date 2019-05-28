@@ -140,46 +140,44 @@ class SearchVisitComponent extends Component {
           </Card.Header>
           <Card.Body>
             <Row>
-              <Col sm={2}> </Col>
-              <Col sm={4}>
+              <Col sm={6}>
                 {" "}
                 <Form.Label>
                   {" "}
                   <b> Doktor:</b>{" "}
                 </Form.Label>{" "}
               </Col>
-              <Col sm={4}>
+              <Col sm={6}>
                 {" "}
                 <Form.Label>
                   {" "}
                   <b> Pacjent:</b>{" "}
                 </Form.Label>{" "}
               </Col>
-              <Col sm={2}> </Col>
             </Row>
             <Row>
-              <Col sm={2}> </Col>
-              <Col sm={4}>
+              <Col sm={6}>
                 <FormControl
                   as="select"
                   value={this.state.doctorId}
                   onChange={this.onChangeDoctorId}
+                  required
                 >
                   <option value="" key={this.state.nullDoctor} />
                   {this.createOptionsDoctors()}
                 </FormControl>
               </Col>
-              <Col sm={4}>
+              <Col sm={6}>
                 <FormControl
                   as="select"
                   value={this.state.patientId}
                   onChange={this.onChangePatientId}
+                  required
                 >
                   <option value="" key={this.state.nullPatient} />
                   {this.createOptionsPatients()}
                 </FormControl>
               </Col>
-              <Col sm={2}> </Col>
             </Row>
             <Row>
               {" "}
@@ -226,14 +224,14 @@ class SearchVisitComponent extends Component {
           {" "}
           <Form.Label> </Form.Label>{" "}
         </Row>
-        <Table striped bordered hover variant="dark">
+        <Table striped bordered hover>
           <thead className="color-khaki color-black">
             <tr>
               <th>Termin</th>
               <th>Miejsce</th>
               <th>Pacjent</th>
               <th>Doktor</th>
-              <th> </th>
+              <th>Akcje</th>
             </tr>
           </thead>
           <tbody>{this.mapVisitsToShow()}</tbody>

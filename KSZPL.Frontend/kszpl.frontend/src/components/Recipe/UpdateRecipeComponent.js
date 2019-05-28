@@ -111,6 +111,7 @@ class UpdateRecipeComponent extends Component {
                   <FormControl
                     onChange={this.onChangePrescribedMedicines}
                     defaultValue={this.state.prescribedMedicines}
+                    required
                   />
                 </Col>
               </Row>

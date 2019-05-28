@@ -274,7 +274,7 @@ namespace KSZPL.Core.Services
                 });
             }
 
-            DateTime dateVisit = DateTime.Parse(dateVisitString);
+            DateTime dateVisit = DateTime.ParseExact(dateVisitString,"d-M-yyyy",System.Globalization.CultureInfo.GetCultureInfo("pl-pl").DateTimeFormat);
 
             listVisits.OrderByDescending(d => d.DateVisit);
 

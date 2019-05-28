@@ -106,6 +106,7 @@ class CreateRecipeComponent extends Component {
                   <FormControl
                     onChange={this.onChangePrescribedMedicines}
                     placeholder="Przepisane leki"
+                    required
                   />
                 </Col>
               </Row>

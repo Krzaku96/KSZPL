@@ -17,6 +17,7 @@ class EditPacientComponent extends Component {
                 placeholder="Imię"
                 value={this.props.firstName}
                 onChange={this.props.handleFirstNameChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -26,6 +27,7 @@ class EditPacientComponent extends Component {
                 placeholder="Nazwisko"
                 value={this.props.lastName}
                 onChange={this.props.handleLastNameChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -35,6 +37,7 @@ class EditPacientComponent extends Component {
                 placeholder="Email"
                 value={this.props.email}
                 onChange={this.props.handleEmailChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -44,6 +47,7 @@ class EditPacientComponent extends Component {
                 placeholder="Adres"
                 value={this.props.address}
                 onChange={this.props.handleAddressChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -62,6 +66,7 @@ class EditPacientComponent extends Component {
                 placeholder="Pesel"
                 value={this.props.pesel}
                 onChange={this.props.handlePeselChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -71,6 +76,7 @@ class EditPacientComponent extends Component {
                 placeholder="Data urodzin"
                 value={this.props.dateBirth}
                 onChange={this.props.handleDateOfBirthChange}
+                required
               />
             </Form.Group>
             <Button type="submit">Edytuj</Button>
