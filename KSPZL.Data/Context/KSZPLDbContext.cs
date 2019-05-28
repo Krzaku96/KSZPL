@@ -16,5 +16,7 @@ namespace KSZPL.Data.Context
         public virtual DbSet<Recipe> Recipes { get; set; }
 
         public virtual DbSet<Visit> Visits { get; set; }
+
+        public virtual DbSet<Medicine> Medicines { get; set; }
     }
 }

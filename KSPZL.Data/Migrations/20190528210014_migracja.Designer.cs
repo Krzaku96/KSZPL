@@ -10,16 +10,29 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KSZPL.Data.Migrations
 {
     [DbContext(typeof(KSZPLDbContext))]
-    [Migration("20190507122228_azinit")]
-    partial class azinit
+    [Migration("20190528210014_migracja")]
+    partial class migracja
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("KSZPL.Data.Models.Medicine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Medicines");
+                });
 
             modelBuilder.Entity("KSZPL.Data.Models.Patient", b =>
                 {
