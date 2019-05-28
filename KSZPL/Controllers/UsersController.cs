@@ -104,5 +104,13 @@ namespace KSZPL.Api.Controllers
             _userService.Delete(id);
             return Ok();
         }
+
+        [Authorize(Roles = Role.Admin)]
+        [HttpDelete("username/{username}")]
+        public IActionResult DeleteByUsername(string username)
+        {
+            _userService.DeleteByUsername(username);
+            return Ok();
+        }
     }
 }

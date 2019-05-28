@@ -12,6 +12,7 @@ namespace KSZPL.Core.Interfaces
         User Create(User user, string password);
         void Update(User user, string password = null);
         void Delete(int id);
+        void DeleteByUsername(string username);
         IEnumerable<DoctorsDto> GetDoctors();
     }
 }

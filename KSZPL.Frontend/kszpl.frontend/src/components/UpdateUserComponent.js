@@ -5,7 +5,7 @@ class UpdateUserComponent extends Component {
   render() {
     return (
       <Card>
-        <Card.Header>
+        <Card.Header className="color-khaki">
           <Card.Title>Zmień hasło</Card.Title>
         </Card.Header>
         <Card.Body>
@@ -16,6 +16,7 @@ class UpdateUserComponent extends Component {
                 type="password"
                 placeholder="Hasło"
                 onChange={this.props.handlePasswordChange}
+                required
               />
             </Form.Group>
             <Button type="submit">Zmień hasło</Button>

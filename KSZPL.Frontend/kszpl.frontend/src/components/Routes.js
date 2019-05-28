@@ -20,6 +20,7 @@ import ShowRecipeComponent from "./Recipe/ShowRecipeComponent";
 import UpdateRecipeComponent from "./Recipe/UpdateRecipeComponent";
 import ShowHistoryTreatment from "./PatientCard/ShowHistoryTreatmentPatientComponent";
 import ErrorComponent from "./Errors/ErrorComponent";
+import EditUserContainer from "../containers/EditUserContainer";
 
 class Routes extends Component {
   render() {
@@ -34,6 +35,7 @@ class Routes extends Component {
                 <Route exact path="/listvisits" component={ListVisitsComponent}></Route>
                 <Route exact path="/searchvisit" component={SearchVisitComponent}></Route>
                 <Route exact path="/showUsers" component={ShowUsersComponent}></Route>
+                <Route exact path="/editUser" component={EditUserContainer}></Route>
                 <Route exact path="/createUser" component={CreateUserContainer}></Route>
                 <Route exact path="/changePassword" component={UpdateUserContainer}></Route>
                 <Route exact path="/successAddUser" component={SuccessAddUserComponent}></Route>

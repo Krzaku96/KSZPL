@@ -6,7 +6,7 @@ class DetailsComponent extends Component {
   render() {
     return (
       <Card>
-        <Card.Header>
+        <Card.Header className="color-khaki">
           <Card.Title>Informacje o Twoim koncie</Card.Title>
         </Card.Header>
         <Card.Body>

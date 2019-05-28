@@ -30,9 +30,10 @@ class ListPatientCardsComponent extends Component{
     }
 
     mapPatientCardsToShow = () => {
-        return this.state.patientCards.map((patientCard) => (
+        return this.state.patientCards.map((patientCard,id) => (
             <PatientCardComponent
-            key={patientCard.id}
+            key={id}
+            nr={id+1}
             id={patientCard.id}
             patientName={patientCard.patientName}
             doctorName={patientCard.doctorName}
@@ -47,13 +48,14 @@ class ListPatientCardsComponent extends Component{
         return (
           <div>
             <Table striped bordered hover>
-              <thead>
+              <thead className="color-khaki color-black"> 
                 <tr>
                   <th> </th>
                   <th>Imię i nazwisko pacjenta</th>
                   <th>Imię i nazwisko doktora</th>
                   <th>Data ostatniej wizyty</th>
                   <th>Data rejestracji</th>
+                  <th>Akcje</th>
                 </tr>
               </thead>
               <tbody>{this.mapPatientCardsToShow()}</tbody>

@@ -5,7 +5,7 @@ class CreateUserComponent extends Component {
   render() {
     return (
       <Card>
-        <Card.Header>
+        <Card.Header className="color-khaki">
           <Card.Title>Dodaj użytkownika</Card.Title>
         </Card.Header>
         <Card.Body>
@@ -16,6 +16,7 @@ class CreateUserComponent extends Component {
                 type="text"
                 placeholder="Imię"
                 onChange={this.props.handleFirstNameChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -24,6 +25,7 @@ class CreateUserComponent extends Component {
                 type="text"
                 placeholder="Nazwisko"
                 onChange={this.props.handleLastNameChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -32,6 +34,7 @@ class CreateUserComponent extends Component {
                 type="text"
                 placeholder="Login"
                 onChange={this.props.handleUsernameChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -40,12 +43,13 @@ class CreateUserComponent extends Component {
                 type="password"
                 placeholder="Hasło"
                 onChange={this.props.handlePasswordChange}
+                required
               />
             </Form.Group>
             <Form.Group>
               <Form.Label>Rola</Form.Label>
               <Form.Control as="select" onChange={this.props.handleRoleChange}>
-                <option value=''></option>
+                <option value="" />
                 <option>Recepcjonista</option>
                 <option>Doktor</option>
                 <option>Admin</option>

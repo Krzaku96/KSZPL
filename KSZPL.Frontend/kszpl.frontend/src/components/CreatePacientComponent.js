@@ -5,7 +5,7 @@ class CreatePacientComponent extends Component {
   render() {
     return (
       <Card>
-        <Card.Header>
+        <Card.Header className="color-khaki">
           <Card.Title>Dodaj pacjenta</Card.Title>
         </Card.Header>
         <Card.Body>
@@ -16,6 +16,7 @@ class CreatePacientComponent extends Component {
                 type="text"
                 placeholder="Imię"
                 onChange={this.props.handleFirstNameChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -24,6 +25,7 @@ class CreatePacientComponent extends Component {
                 type="text"
                 placeholder="Nazwisko"
                 onChange={this.props.handleLastNameChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -32,6 +34,7 @@ class CreatePacientComponent extends Component {
                 type="text"
                 placeholder="Email"
                 onChange={this.props.handleEmailChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -40,6 +43,7 @@ class CreatePacientComponent extends Component {
                 type="text"
                 placeholder="Adres"
                 onChange={this.props.handleAddressChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -56,6 +60,7 @@ class CreatePacientComponent extends Component {
                 type="text"
                 placeholder="Pesel"
                 onChange={this.props.handlePeselChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -64,6 +69,7 @@ class CreatePacientComponent extends Component {
                 type="date"
                 placeholder="Data urodzin"
                 onChange={this.props.handleDateOfBirthChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -72,8 +78,9 @@ class CreatePacientComponent extends Component {
                 as="select"
                 placeholder="Doktor"
                 onChange={this.props.handleDoctorChange}
+                required
               >
-              <option value=''></option>
+                <option value="" />
                 {this.props.createOptionsDoctors()}
               </Form.Control>
             </Form.Group>

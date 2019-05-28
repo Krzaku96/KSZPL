@@ -30,7 +30,7 @@ class PatientCardComponent extends Component{
     render() {
         return(
         <tr>
-            <td>{this.props.id}</td>
+            <td>{this.props.nr}</td>
             <td>{this.props.patientName}</td>
             <td>{this.props.doctorName}</td>
             <td>{this.parseDate(this.props.dateLastVisit)}</td>

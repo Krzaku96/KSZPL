@@ -83,6 +83,9 @@ class UpdateRecipeComponent extends Component {
   render() {
     return (
       <Card>
+        <Card.Header className="color-khaki">
+          <Card.Title>Edytuj receptę</Card.Title>
+        </Card.Header>
         <Card.Body>
           <Row>
             <Form horizontal className="formVisit">
@@ -108,6 +111,7 @@ class UpdateRecipeComponent extends Component {
                   <FormControl
                     onChange={this.onChangePrescribedMedicines}
                     defaultValue={this.state.prescribedMedicines}
+                    required
                   />
                 </Col>
               </Row>

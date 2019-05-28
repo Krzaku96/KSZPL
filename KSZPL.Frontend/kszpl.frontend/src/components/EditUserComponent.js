@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Card, Button } from "react-bootstrap";
 
-class EditPacientComponent extends Component {
+class EditUserComponent extends Component {
   render() {
     return (
       <Card>
@@ -9,7 +9,7 @@ class EditPacientComponent extends Component {
           <Card.Title>Edytuj pacjenta</Card.Title>
         </Card.Header>
         <Card.Body>
-          <Form onSubmit={this.props.editPatientOnClick}>
+          <Form onSubmit={this.props.editUserOnClick}>
             <Form.Group>
               <Form.Label>Imię</Form.Label>
               <Form.Control
@@ -31,51 +31,34 @@ class EditPacientComponent extends Component {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Email</Form.Label>
+              <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Email"
-                value={this.props.email}
-                onChange={this.props.handleEmailChange}
+                placeholder="Username"
+                disabled
+                value={this.props.username}
                 required
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Adres</Form.Label>
+              <Form.Label>Rola</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Adres"
-                value={this.props.address}
-                onChange={this.props.handleAddressChange}
+                as="select"
+                onChange={this.props.handleRoleChange}
                 required
-              />
+              >
+                <option value="" />
+                <option>Recepcjonista</option>
+                <option>Doktor</option>
+                <option>Admin</option>
+              </Form.Control>
             </Form.Group>
             <Form.Group>
-              <Form.Label>NIP</Form.Label>
+              <Form.Label>Hasło</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="NIP"
-                value={this.props.nip}
-                onChange={this.props.handleNIPChange}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Pesel</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Pesel"
-                value={this.props.pesel}
-                onChange={this.props.handlePeselChange}
-                required
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Data urodzin</Form.Label>
-              <Form.Control
-                type="date"
-                placeholder="Data urodzin"
-                value={this.props.dateBirth}
-                onChange={this.props.handleDateOfBirthChange}
+                type="password"
+                placeholder="Hasło"
+                onChange={this.props.handlePasswordChange}
                 required
               />
             </Form.Group>
@@ -87,4 +70,4 @@ class EditPacientComponent extends Component {
   }
 }
 
-export default EditPacientComponent;
+export default EditUserComponent;

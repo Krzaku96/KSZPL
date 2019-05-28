@@ -181,6 +181,7 @@ class AppBarContainer extends Component {
         redirectToCreateVisit={this.redirectToCreateVisit}
         redirectToSearchVisit={this.redirectToSearchVisit}
         redirectToListPatientCards={this.redirectToListPatientCards}
+        redirectToShowUsers={this.redirectToShowUsers}
       />
     );
   }

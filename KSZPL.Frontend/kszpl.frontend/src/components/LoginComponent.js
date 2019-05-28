@@ -6,7 +6,7 @@ class LoginComponent extends Component {
   render() {
     return (
       <Card className="card">
-        <Card.Header>
+        <Card.Header className="color-khaki">
           <Card.Title>Zaloguj się na swoje konto</Card.Title>
         </Card.Header>
         <Card.Body>
