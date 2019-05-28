@@ -128,6 +128,7 @@ namespace KSZPL.Core.Services
             user.FirstName = userParam.FirstName;
             user.LastName = userParam.LastName;
             user.Username = userParam.Username;
+            user.Role = userParam.Role;
             
             if (!string.IsNullOrWhiteSpace(password))
             {
@@ -152,6 +153,16 @@ namespace KSZPL.Core.Services
             _context.SaveChanges();
         }
 
+        public void DeleteByUsername(string username)
+        {
+            var user = _context.Users.Where(u => u.Username.Equals(username)).Select(x => x).SingleOrDefault();
+            if (user == null)
+            {
+                return;
+            }
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+        }
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             if (password == null)

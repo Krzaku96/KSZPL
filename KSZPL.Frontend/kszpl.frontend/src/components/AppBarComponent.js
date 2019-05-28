@@ -24,7 +24,7 @@ class AppBarComponent extends Component {
                     <NavDropdown.Item onClick={this.props.redirectToAddUser}>
                       Dodaj użytkownika
                     </NavDropdown.Item>
-                    <NavDropdown.Item onClick={this.props.showUsersOnClick}>
+                    <NavDropdown.Item onClick={this.props.redirectToShowUsers}>
                       Wyświetl informacje o użytkownikach
                     </NavDropdown.Item>
                   </div>

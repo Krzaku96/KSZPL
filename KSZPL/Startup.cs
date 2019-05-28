@@ -31,7 +31,7 @@ namespace KSZPL.Api
         {
             services.AddCors();
             services.AddMvc();
-            services.AddDbContext<KSZPLDbContext>(x => x.UseSqlServer(Configuration.GetConnectionString("AzureDB")));
+            services.AddDbContext<KSZPLDbContext>(x => x.UseSqlServer(Configuration.GetConnectionString("LocalDB")));
             services.AddAutoMapper();
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
