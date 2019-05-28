@@ -28,7 +28,7 @@ class UpdateVisitComponent extends Component {
     }
 
     componentDidMount(){
-        axios.get( BASE_URL + `/visit/editvisit/${this.props.match.params.id}`)
+        axios.get( BASE_URL + `visit/editvisit/${this.props.match.params.id}`)
             .then((response) => {
                 debugger;
                 this.setState({
@@ -94,7 +94,7 @@ class UpdateVisitComponent extends Component {
             Accept: "application/json"
             }
         };
-            axios.put(BASE_URL + '/visit/editvisit', {dateVisit: this.state.dateVisit, description: this.state.description, id: this.state.id, patientId: this.state.patientId, place: this.state.place, status: this.state.status, userId: this.state.userId },axiosConfig)
+            axios.put(BASE_URL + 'visit/editvisit', {dateVisit: this.state.dateVisit, description: this.state.description, id: this.state.id, patientId: this.state.patientId, place: this.state.place, status: this.state.status, userId: this.state.userId },axiosConfig)
             .then(()=>{
                 window.confirm('Wizyta została edytowana!');
                 window.location = '/listvisits'

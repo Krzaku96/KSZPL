@@ -6,12 +6,22 @@ import UpdateUserComponent from "../components/UpdateUserComponent";
 
 class UpdateUserContainer extends Component {
   state = {
-    password: ""
+    password: "",
+    errorCode: ""
   };
 
-  redirectToSuccessAdd = () => {
+  redirectToHome = () => {
     return this.props.history.push({
-      pathname: "/successAddUser"
+      pathname: "/"
+    });
+  };
+
+  handleError = () => {
+    return this.props.history.push({
+      pathname: "/error",
+      state: {
+        errorCode: this.state.errorCode
+      }
     });
   };
 
@@ -39,13 +49,20 @@ class UpdateUserContainer extends Component {
       token: JSON.parse(localStorage.getItem("token"))
     };
 
-    axios.put(BASE_URL + "Users", postData, axiosConfig).then(response => {
-      if (response) {
-        this.redirectToSuccessAdd();
-      } else {
-        console.log("Can't find response");
-      }
-    });
+    axios
+      .put(BASE_URL + "Users", postData, axiosConfig)
+      .then(response => {
+        if (response) {
+          window.confirm("Użytkownik został zedytowany!");
+          this.redirectToHome();
+        } else {
+          console.log("Can't find response");
+        }
+      })
+      .catch(error => {
+        this.setState({ errorCode: error.response.status });
+        this.handleError();
+      });
   };
 
   render() {

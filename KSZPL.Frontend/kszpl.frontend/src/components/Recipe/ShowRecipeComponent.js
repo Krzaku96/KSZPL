@@ -51,7 +51,7 @@ class ShowRecipeComponent extends Component{
     }
 
     onClickGeneratePdf = () => {
-        axios.get( BASE_URL + `/recipe/generaterecipepdf/${this.props.match.params.id}`)
+        axios.get( BASE_URL + `recipe/generaterecipepdf/${this.props.match.params.id}`)
             .then(()=>{
                 window.confirm('Wygenerowana została recepta w formacie PDF!');
             })

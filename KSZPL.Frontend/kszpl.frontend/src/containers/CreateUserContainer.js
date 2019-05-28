@@ -10,12 +10,22 @@ class CreateUserContainer extends Component {
     lastName: "",
     username: "",
     password: "",
-    role: ""
+    role: "",
+    errorCode: 0
   };
 
-  redirectToSuccessAdd = () => {
+  redirectToHome = () => {
     return this.props.history.push({
-      pathname: "/successAddUser"
+      pathname: "/"
+    });
+  };
+
+  handleError = () => {
+    return this.props.history.push({
+      pathname: "/error",
+      state: {
+        errorCode: this.state.errorCode
+      }
     });
   };
 
@@ -63,10 +73,15 @@ class CreateUserContainer extends Component {
       .post(BASE_URL + "Users/register", postData, axiosConfig)
       .then(response => {
         if (response) {
-          this.redirectToSuccessAdd();
+          window.confirm("Użytkownik został dodany!");
+          this.redirectToHome();
         } else {
           console.log("Can't find response");
         }
+      })
+      .catch(error => {
+        this.setState({ errorCode: error.response.status });
+        this.handleError();
       });
   };
 

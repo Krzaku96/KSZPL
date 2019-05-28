@@ -19,6 +19,7 @@ import ListPatientCardsComponent from "./PatientCard/ListPatientCardsComponent";
 import ShowRecipeComponent from "./Recipe/ShowRecipeComponent";
 import UpdateRecipeComponent from "./Recipe/UpdateRecipeComponent";
 import ShowHistoryTreatment from "./PatientCard/ShowHistoryTreatmentPatientComponent";
+import ErrorComponent from "./Errors/ErrorComponent";
 
 class Routes extends Component {
   render() {
@@ -44,6 +45,7 @@ class Routes extends Component {
                 <Route exact path="/recipe/getrecipe/:id" component={ShowRecipeComponent}></Route>
                 <Route exact path="/recipe/update/:id" component={UpdateRecipeComponent}></Route>
                 <Route exact path="/patientcard/showhistory/:id" component={ShowHistoryTreatment}></Route>
+                <Route exact path="/error" component={ErrorComponent}></Route>
             </Switch>
         </div>
     );

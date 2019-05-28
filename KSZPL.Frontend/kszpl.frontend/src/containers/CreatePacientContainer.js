@@ -28,9 +28,9 @@ class CreatePacientContainer extends Component {
     this.setState({ dateOfRegister: moment().format("YYYY-MM-DD") });
   };
 
-  redirectToSuccessAdd = () => {
+  redirectToHome = () => {
     return this.props.history.push({
-      pathname: "/successAddUser"
+      pathname: "/"
     });
   };
 
@@ -133,7 +133,8 @@ class CreatePacientContainer extends Component {
       )
       .then(response => {
         if (response) {
-          this.redirectToSuccessAdd();
+          window.confirm('Pacjent został dodany!');
+          this.redirectToHome();
         } else {
           console.log("Can't find response");
         }
