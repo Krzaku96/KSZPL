@@ -5,7 +5,7 @@ class CreateUserComponent extends Component {
   render() {
     return (
       <Card>
-        <Card.Header>
+        <Card.Header className="color-khaki">
           <Card.Title>Dodaj użytkownika</Card.Title>
         </Card.Header>
         <Card.Body>

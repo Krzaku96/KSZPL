@@ -46,8 +46,8 @@ class ListPatientCardsComponent extends Component{
     render() {
         return (
           <div>
-            <Table striped bordered hover>
-              <thead>
+            <Table striped bordered hover variant="dark">
+              <thead className="color-khaki color-black"> 
                 <tr>
                   <th> </th>
                   <th>Imię i nazwisko pacjenta</th>

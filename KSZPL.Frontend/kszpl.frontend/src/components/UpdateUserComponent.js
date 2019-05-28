@@ -5,7 +5,7 @@ class UpdateUserComponent extends Component {
   render() {
     return (
       <Card>
-        <Card.Header>
+        <Card.Header className="color-khaki">
           <Card.Title>Zmień hasło</Card.Title>
         </Card.Header>
         <Card.Body>

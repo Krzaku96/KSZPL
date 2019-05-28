@@ -25,6 +25,14 @@
   color: #fff;
 }
 
-.rbc-calendar-color{
+.rbc-calendar-color {
   background-color: khaki;
+}
+
+.color-khaki {
+  background-color: khaki !important;
+}
+
+.color-black {
+  color: black !important;
 }

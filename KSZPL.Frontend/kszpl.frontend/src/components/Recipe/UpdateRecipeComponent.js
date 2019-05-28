@@ -83,6 +83,9 @@ class UpdateRecipeComponent extends Component {
   render() {
     return (
       <Card>
+        <Card.Header className="color-khaki">
+          <Card.Title>Edytuj receptę</Card.Title>
+        </Card.Header>
         <Card.Body>
           <Row>
             <Form horizontal className="formVisit">

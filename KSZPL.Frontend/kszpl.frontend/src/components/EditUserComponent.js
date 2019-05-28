@@ -5,7 +5,7 @@ class EditUserComponent extends Component {
   render() {
     return (
       <Card>
-        <Card.Header>
+        <Card.Header className="color-khaki">
           <Card.Title>Edytuj pacjenta</Card.Title>
         </Card.Header>
         <Card.Body>
