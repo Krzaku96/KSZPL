@@ -31,12 +31,28 @@ namespace KSZPL.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("registerrecipe")]
-        public IActionResult RegisterRecipe([FromBody]RecipeDto recipeDto)
+        public IActionResult RegisterRecipe([FromBody]ShowRecipeNewDto showRecipeNewDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
+            string medicines = null;
+
+            foreach (var item in showRecipeNewDto.SelectedMedicines)
+            {
+                medicines = medicines +  item.value + " ";
+            }
+
+            RecipeDto recipeDto = new RecipeDto()
+            {
+                Id = showRecipeNewDto.Id,
+                DateRelease = showRecipeNewDto.DateRelease,
+                PatientCardId = showRecipeNewDto.PatientCardId,
+                PrescribedMedicines = medicines,
+                UserId = showRecipeNewDto.UserId,
+                VisitId = showRecipeNewDto.VisitId
+            };
 
             var recipe = _mapper.Map<Recipe>(recipeDto);
 
