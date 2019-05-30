@@ -2,6 +2,7 @@
 using Aspose.Pdf.Drawing;
 using Aspose.Pdf.Text;
 using AutoMapper;
+using KSZPL.Core.Dtos.Medicine;
 using KSZPL.Core.Dtos.Patient;
 using KSZPL.Core.Dtos.PatientCard;
 using KSZPL.Core.Dtos.Recipe;
@@ -289,6 +290,18 @@ namespace KSZPL.Core.Services
             page.Paragraphs.Add(boxForSignature);
 
             document.Save(String.Format("Recepta-wizyta{0}.pdf", recipeDto.VisitId));
+        }
+
+        public string GetMedicines(List<GetMedicineDto> getMedicineDtos)
+        {
+            string medicines = null;
+
+            foreach (var item in getMedicineDtos)
+            {
+                medicines = medicines + ", " + item.value;
+            }
+
+            return medicines;
         }
     }
 }
