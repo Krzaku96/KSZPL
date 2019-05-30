@@ -198,12 +198,14 @@ class UpdateVisitComponent extends Component {
                   <Form.Label> Status: </Form.Label>{" "}
                 </Col>
                 <Col sm={12}>
-                  <FormControl
-                    onChange={this.onChangeStatus}
-                    defaultValue={this.state.status}
-                    placeholder="Status wizyty"
-                    required
-                  />
+                     <Form.Control as="select" onChange={this.onChangeStatus}
+                      defaultValue={this.state.status}
+                      required
+                     >
+                    <option>Aktywna</option>
+                    <option>Odwołana</option>
+                    <option>Odbyta</option>
+                  </Form.Control>
                 </Col>
               </Row>
               <Row>

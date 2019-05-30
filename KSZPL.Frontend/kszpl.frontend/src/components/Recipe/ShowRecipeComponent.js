@@ -18,7 +18,7 @@ class ShowRecipeComponent extends Component {
 
   componentDidMount() {
     axios
-      .get(BASE_URL + `/recipe/getrecipe/${this.props.match.params.id}`)
+      .get(BASE_URL + `recipe/getrecipe/${this.props.match.params.id}`)
       .then(response => {
         debugger;
         this.setState({

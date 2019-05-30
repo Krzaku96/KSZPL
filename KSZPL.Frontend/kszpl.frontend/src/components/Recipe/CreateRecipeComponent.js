@@ -5,6 +5,8 @@ import { withRouter } from "react-router-dom";
 import { Form, FormControl, Col, Row, Card } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import DatePicker from "react-datepicker";
+import Select from "react-select";
+import "react-select/dist/react-select.css";
 
 class CreateRecipeComponent extends Component {
   constructor() {
@@ -16,8 +18,25 @@ class CreateRecipeComponent extends Component {
       userId: 0,
       dateRelease: new Date(),
       prescribedMedicines: "",
-      visitId: 0
+      visitId: 0, 
+      medicines: [],
+      selectedMedicines: [],
+      filterOptions: [
+        { value: "foo", label: "Foo" },
+        { value: "bar", label: "Bar" },
+        { value: "bat", label: "Bat" }
+      ]
     };
+
+    this.onChangeMedicines = this.onChangeMedicines.bind(this);
+  }
+
+  componentWillMount() {
+    axios.get(BASE_URL + "medicine/getmedicines").then(response => {
+      this.setState({
+        medicines: response.data
+      });
+    });
   }
 
   componentDidMount() {
@@ -52,7 +71,7 @@ class CreateRecipeComponent extends Component {
         BASE_URL + "recipe/registerrecipe",
         {
           dateRelease: this.state.dateRelease,
-          prescribedMedicines: this.state.prescribedMedicines,
+          selectedMedicines: this.state.selectedMedicines,
           id: 0,
           patientCardId: this.state.patientCardId,
           userId: this.state.userId,
@@ -71,9 +90,15 @@ class CreateRecipeComponent extends Component {
 
   onChangeDateRelease = dateRelease => this.setState({ dateRelease });
 
-  onChangePrescribedMedicines = event => {
-    this.setState({ prescribedMedicines: event.target.value });
-  };
+  onChangeMedicines(option) {
+    this.setState(state => {
+      debugger;
+      return {
+        selectedMedicines: option
+      }
+    })
+  }
+
 
   render() {
     return (
@@ -103,11 +128,13 @@ class CreateRecipeComponent extends Component {
                   <Form.Label> Przepisane leki: </Form.Label>{" "}
                 </Col>
                 <Col sm={11}>
-                  <FormControl
-                    onChange={this.onChangePrescribedMedicines}
-                    placeholder="Przepisane leki"
-                    required
-                  />
+                  <Select 
+                    name="filters"
+                    placeholder="Wybierz leki"
+                    value={this.state.selectedMedicines}
+                    options={this.state.medicines}
+                    onChange={this.onChangeMedicines}
+                    multi />
                 </Col>
               </Row>
               <Row>

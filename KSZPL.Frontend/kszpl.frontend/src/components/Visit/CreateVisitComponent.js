@@ -184,11 +184,12 @@ class CreateVisitComponent extends Component {
                   <Form.Label> Status: </Form.Label>{" "}
                 </Col>
                 <Col sm={12}>
-                  <FormControl
-                    onChange={this.onChangeStatus}
-                    placeholder="Status wizyty"
-                    required
-                  />
+                  <Form.Control as="select" onChange={this.onChangeStatus}>
+                    <option value="" />
+                    <option>Aktywna</option>
+                    <option>Odwołana</option>
+                    <option>Odbyta</option>
+                  </Form.Control>
                 </Col>
               </Row>
               <Row>
